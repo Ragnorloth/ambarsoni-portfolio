@@ -1,6 +1,7 @@
 backend:
   name: turbo-github
   turbo_site_id: decd8085-6f3d-417e-b009-7bbb055c6f13
+  repo: Ragnorloth/ambarsoni-portfolio
   branch: main
 
 media_folder: "assets/uploads"
