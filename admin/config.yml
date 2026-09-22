@@ -1,0 +1,48 @@
+backend:
+  name: turbo-github
+  turbo_site_id: decd8085-6f3d-417e-b009-7bbb055c6f13
+  branch: main
+
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+collections:
+  - name: "site"
+    label: "Site Settings"
+    files:
+      - name: "site"
+        label: "Site Settings"
+        file: "content/site.yml"
+        fields:
+          - {label: "Site title", name: "site_title", widget: "string"}
+          - {label: "Hero title", name: "hero_title", widget: "string"}
+          - {label: "Hero description", name: "hero_description", widget: "text"}
+          - {label: "Location", name: "location", widget: "string"}
+          - {label: "Email", name: "email", widget: "string"}
+          - {label: "Phone", name: "phone", widget: "string"}
+          - {label: "WhatsApp", name: "whatsapp", widget: "string"}
+          - {label: "LinkedIn", name: "linkedin", widget: "string"}
+          - {label: "Behance", name: "behance", widget: "string"}
+  - name: "projects"
+    label: "Selected Films"
+    files:
+      - name: "projects"
+        label: "Film Portfolio"
+        file: "content/projects.yml"
+        fields:
+          - label: "Selected films"
+            name: "selected_films"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Category", name: "category", widget: "string"}
+              - {label: "Video embed URL", name: "video", widget: "string"}
+              - {label: "Visible", name: "visible", widget: "boolean", default: true}
+  - name: "uploads"
+    label: "Uploaded Media"
+    folder: "assets/uploads"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "File", name: "file", widget: "file"}
