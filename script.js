@@ -40,6 +40,7 @@ async function loadContent(){
     if(!siteRes.ok || !portfolioRes.ok) throw new Error('Content files unavailable');
     const site=await siteRes.json(); const portfolio=await portfolioRes.json(); const sections=portfolio.sections||[];
     document.title=site.site_title || document.title;
+    if(site.favicon){ const icon=document.querySelector('#site-favicon'); if(icon) icon.href=site.favicon; }
     const heroTitle=site.hero_title || 'Creative';
     const constant=$('.hero-constant'); if(constant) constant.textContent='Creative';
     initTypewriter();

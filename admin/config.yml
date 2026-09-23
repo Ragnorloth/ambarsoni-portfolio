@@ -18,6 +18,7 @@ collections:
           - {label: "Site title", name: "site_title", widget: "string"}
           - {label: "Hero title", name: "hero_title", widget: "string"}
           - {label: "Hero description", name: "hero_description", widget: "text"}
+          - {label: "Favicon", name: "favicon", widget: "image", required: false, hint: "Upload a square PNG, JPG or SVG used as the browser tab icon."}
           - {label: "Location", name: "location", widget: "string"}
           - {label: "Email", name: "email", widget: "string"}
           - {label: "Phone", name: "phone", widget: "string"}
@@ -32,6 +33,8 @@ collections:
         label: "Sections & Projects"
         file: "content/portfolio.json"
         format: json
+        editor:
+          preview: true
         fields:
           - label: "Sections"
             name: "sections"
