@@ -3,16 +3,16 @@
     {
       "items": [
         {
-          "video_url": "https://www-ccv.adobe.io/v1/player/ccv/PerLII6bcdX/embed?api_key=behance1&bgcolor=%23070707",
+          "video_url": "https://drive.google.com/file/d/1-QqRs5hNbKbhkJL5ZWi233VAqNFEZl46/view?usp=sharing",
           "featured": true,
           "visible": true,
           "media_type": "embed",
-          "title": "StrandSoul — Product Showcase",
-          "video": "",
-          "image": "",
+          "title": "Gayatri Matra — silver Lining Astrology",
+          "video": "https://drive.google.com/file/d/1-QqRs5hNbKbhkJL5ZWi233VAqNFEZl46/view?usp=sharing",
+          "image": "/assets/uploads/gayatri-mantra-.png",
           "external_url": "",
           "description": "",
-          "category": "Product Film · AI + Editing"
+          "category": "Product Film · AI + Editing + Mantra"
         },
         {
           "video_url": "https://www-ccv.adobe.io/v1/player/ccv/5vpwnRGAgkt/embed?api_key=behance1&bgcolor=%23070707",
