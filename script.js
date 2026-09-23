@@ -34,26 +34,18 @@ function renderSection(section, index){
   return `<section id="${esc(section.anchor || `section-${index+1}`)}" class="section managed-section ${theme}"><div class="section-head"><div><span class="eyebrow">${esc(section.eyebrow || `${String(index+1).padStart(2,'0')} / SECTION`)}</span><h2>${heading}</h2></div></div>${section.description?`<p class="managed-description">${esc(section.description)}</p>`:''}${process}<div class="${gridClass}">${cards}</div></section>`;
 }
 
-function renderArchive(sections){
-  const all=[];
-  sections.forEach(s => (s.items||[]).filter(x=>x.visible!==false).forEach(x=>{ if(x.media_type==='image' && x.image) all.push({item:x, section:s}); }));
-  const grid = $('#archiveGrid'); if(!grid) return;
-  grid.innerHTML = all.map(({item,section},i)=>`<figure class="asset" data-cat="${esc(section.anchor || slug(item.category || section.nav_label || 'work'))}">${mediaMarkup(item)}<figcaption><span>${String(i+1).padStart(2,'0')}</span><b>${esc(item.category || section.nav_label || 'Visual Work')}</b><strong>${esc(item.title)}</strong></figcaption></figure>`).join('');
-}
-
 async function loadContent(){
   try{
     const [siteRes, portfolioRes] = await Promise.all([fetch('content/site.json',{cache:'no-store'}),fetch('content/portfolio.json',{cache:'no-store'})]);
     if(!siteRes.ok || !portfolioRes.ok) throw new Error('Content files unavailable');
     const site=await siteRes.json(); const portfolio=await portfolioRes.json(); const sections=portfolio.sections||[];
     document.title=site.site_title || document.title;
-    const heroTitle=site.hero_title || 'Ideas in motion.';
-    const heroWords=heroTitle.split(/\s+/); $('.hero-copy h1').innerHTML=heroWords.length>2?`${esc(heroWords.slice(0,-1).join(' '))}<br><em>${esc(heroWords.at(-1))}</em>`:esc(heroTitle);
-    $('.hero-lede').textContent=site.hero_description||'';
+    const heroTitle=site.hero_title || 'Creative';
+    const constant=$('.hero-constant'); if(constant) constant.textContent='Creative';
+    initTypewriter();
     document.querySelector('.hero-meta span').textContent=(site.location||'').split(',').slice(-2).join(' / ').toUpperCase();
     $('#managedSections').innerHTML=sections.map(renderSection).join('');
     const nav=$('#managedNav'); nav.innerHTML=sections.filter(s=>s.show_in_nav!==false).map(s=>`<a href="#${esc(s.anchor)}">${esc(s.nav_label||s.eyebrow||s.heading)}</a>`).join('')+'<a href="#about">About</a>';
-    renderArchive(sections);
     if(site.email){const a=document.querySelector('#contact a[href^="mailto:"]'); a.href=`mailto:${site.email}`; a.querySelector('strong').textContent=site.email;}
     if(site.whatsapp){const a=document.querySelector('#contact a[href*="wa.me"]'); a.href=site.whatsapp;}
     if(site.phone){const a=document.querySelector('#contact a[href*="wa.me"]'); a.querySelector('strong').textContent=site.phone;}
@@ -70,8 +62,134 @@ async function loadContent(){
 
 function setupInteractions(){
   document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}}));
-  document.querySelectorAll('.archive-controls button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.archive-controls button').forEach(x=>x.classList.remove('active'));b.classList.add('active');const v=slug(b.dataset.show);document.querySelectorAll('#archiveGrid .asset').forEach(x=>{x.style.display=v==='all'?'':x.dataset.cat===v?'':'none';});}));
+  setupPointerGlow();
+  setupTypewriterParallax();
+  setupGraphicLightbox();
+  setupEnvelopeScroll();
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.08});
-  document.querySelectorAll('.film,.asset,.cap,.about h2,.contact h2').forEach(e=>{e.classList.add('reveal');io.observe(e)});
+  document.querySelectorAll('.film,.asset,.cap,.about h2,.contact h2,.envelope-copy').forEach(e=>{e.classList.add('reveal');io.observe(e)});
 }
 loadContent();
+
+
+const ROLE_WORDS = [
+  'video editor.',
+  'graphic designer.',
+  'social media optimisation.',
+  'AI animator.',
+  'Magnific creator.',
+  'ChatGPT AI creative.',
+  'Higgsfield artist.',
+  'AI 3D animator.',
+  'Seedance 2.0 expert.'
+];
+
+function initTypewriter(){
+  const el=document.querySelector('#heroRole');
+  if(!el || el.dataset.ready) return;
+  el.dataset.ready='1';
+  let index=0;
+  const type=(text, done)=>{
+    let i=0;
+    el.textContent='';
+    const timer=setInterval(()=>{
+      el.textContent=text.slice(0,++i);
+      if(i>=text.length){clearInterval(timer); if(done) setTimeout(done,850);}
+    },34);
+  };
+  const erase=(done)=>{
+    const timer=setInterval(()=>{
+      el.textContent=el.textContent.slice(0,-1);
+      if(!el.textContent){clearInterval(timer); done();}
+    },22);
+  };
+  const cycle=()=>{
+    const next=ROLE_WORDS[index % ROLE_WORDS.length];
+    type(next,()=>erase(()=>{index=(index+1)%ROLE_WORDS.length; cycle();}));
+  };
+  cycle();
+}
+
+function setupPointerGlow(){
+  if(matchMedia('(pointer:coarse)').matches) return;
+  const a=document.querySelector('.pointer-glow-a');
+  const b=document.querySelector('.pointer-glow-b');
+  if(!a || !b) return;
+  let tx=innerWidth*.5, ty=innerHeight*.45, x=tx, y=ty, bx=x, by=y;
+  addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY;document.body.classList.add('pointer-active')},{passive:true});
+  const tick=()=>{
+    x += (tx-x)*.08; y += (ty-y)*.08;
+    bx += (tx-bx)*.035; by += (ty-by)*.035;
+    a.style.transform=`translate3d(${x}px,${y}px,0)`;
+    b.style.transform=`translate3d(${bx}px,${by}px,0)`;
+    requestAnimationFrame(tick);
+  };
+  tick();
+}
+
+function setupTypewriterParallax(){
+  const hero=document.querySelector('.hero');
+  const card=document.querySelector('.profile-card');
+  const copy=document.querySelector('.hero-copy');
+  if(!hero) return;
+  let raf=0;
+  addEventListener('scroll',()=>{
+    if(raf) return;
+    raf=requestAnimationFrame(()=>{
+      const y=scrollY;
+      if(y<innerHeight*1.2){
+        const p=Math.min(y/innerHeight,1);
+        if(card) card.style.transform=`translate3d(0,${p*-34}px,0) rotate(${1.5+p*-2}deg)`;
+        if(copy) copy.style.transform=`translate3d(0,${p*-18}px,0)`;
+        hero.style.setProperty('--hero-depth', `${p*18}px`);
+      }
+      raf=0;
+    });
+  },{passive:true});
+}
+
+function setupGraphicLightbox(){
+  const cards=document.querySelectorAll('#graphics .asset, .managed-section#graphics .asset');
+  if(!cards.length) return;
+  let modal=document.querySelector('.media-lightbox');
+  if(!modal){
+    modal=document.createElement('div');
+    modal.className='media-lightbox';
+    modal.innerHTML='<button class="lightbox-close" aria-label="Close">×</button><div class="lightbox-inner"><img alt=""><div class="lightbox-caption"></div></div>';
+    document.body.appendChild(modal);
+    const close=()=>{modal.classList.remove('open');document.body.classList.remove('modal-open');};
+    modal.addEventListener('click',e=>{if(e.target===modal || e.target.closest('.lightbox-close')) close();});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape') close();});
+  }
+  const image=modal.querySelector('img'), caption=modal.querySelector('.lightbox-caption');
+  cards.forEach(card=>card.addEventListener('click',()=>{
+    const img=card.querySelector('img'); if(!img) return;
+    image.src=img.currentSrc || img.src; image.alt=img.alt || '';
+    const title=card.querySelector('strong')?.textContent || img.alt || 'Graphic design';
+    const category=card.querySelector('b')?.textContent || 'GRAPHIC DESIGN';
+    caption.innerHTML=`<span>${esc(category)}</span><strong>${esc(title)}</strong>`;
+    modal.classList.add('open'); document.body.classList.add('modal-open');
+  }));
+}
+
+function setupEnvelopeScroll(){
+  const section=document.querySelector('.envelope-section');
+  const wrap=document.querySelector('.envelope-wrap');
+  const card=document.querySelector('.envelope-card');
+  const flap=document.querySelector('.envelope-flap');
+  if(!section || !wrap || !card || !flap) return;
+  let raf=0;
+  const update=()=>{
+    const rect=section.getBoundingClientRect();
+    const range=Math.max(section.offsetHeight-innerHeight,1);
+    const progress=Math.max(0,Math.min(1,-rect.top/range));
+    const lift=Math.max(0,Math.min(1,(progress-.18)/.64));
+    wrap.style.setProperty('--card-lift',`${lift*300}px`);
+    wrap.style.setProperty('--card-tilt',`${(1-lift)*2.5}deg`);
+    flap.style.transform=`rotateX(${lift*175}deg)`;
+    wrap.classList.toggle('opened',lift>.45);
+    raf=0;
+  };
+  addEventListener('scroll',()=>{if(!raf) raf=requestAnimationFrame(update)},{passive:true});
+  update();
+}
