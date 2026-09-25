@@ -1,0 +1,94 @@
+backend:
+  name: turbo-github
+  turbo_site_id: decd8085-6f3d-417e-b009-7bbb055c6f13
+  branch: main
+
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+collections:
+  - name: "site"
+    label: "Site Settings"
+    files:
+      - name: "site"
+        label: "Site Settings"
+        file: "content/site.json"
+        format: json
+        fields:
+          - {label: "Site title", name: "site_title", widget: "string"}
+          - {label: "Hero title", name: "hero_title", widget: "string"}
+          - {label: "Hero description", name: "hero_description", widget: "text"}
+          - {label: "Favicon", name: "favicon", widget: "image", required: false, hint: "Upload a square PNG, JPG or SVG used as the browser tab icon."}
+          - {label: "Location", name: "location", widget: "string"}
+          - {label: "Email", name: "email", widget: "string"}
+          - {label: "Phone", name: "phone", widget: "string"}
+          - {label: "WhatsApp", name: "whatsapp", widget: "string"}
+          - {label: "LinkedIn", name: "linkedin", widget: "string"}
+          - {label: "Behance", name: "behance", widget: "string"}
+
+  - name: "portfolio"
+    label: "Portfolio Sections"
+    files:
+      - name: "portfolio"
+        label: "Sections & Projects"
+        file: "content/portfolio.json"
+        format: json
+        editor:
+          preview: true
+        fields:
+          - label: "Sections"
+            name: "sections"
+            widget: "list"
+            allow_add: true
+            allow_remove: true
+            allow_reorder: true
+            collapsed: true
+            summary: "{{fields.eyebrow}} — {{fields.heading}}"
+            fields:
+              - {label: "Section ID / anchor", name: "anchor", widget: "string", hint: "Use lowercase words and hyphens, e.g. ai-films"}
+              - {label: "Eyebrow", name: "eyebrow", widget: "string"}
+              - {label: "Heading", name: "heading", widget: "string"}
+              - {label: "Description", name: "description", widget: "text", required: false}
+              - label: "Theme"
+                name: "theme"
+                widget: "select"
+                options:
+                  - {label: "Dark", value: "dark"}
+                  - {label: "Light", value: "light"}
+                  - {label: "Dark Alternate", value: "dark-alt"}
+              - {label: "Show in navigation", name: "show_in_nav", widget: "boolean", default: true}
+              - {label: "Navigation label", name: "nav_label", widget: "string", required: false}
+              - {label: "Show 3D process line", name: "process", widget: "boolean", default: false, required: false}
+              - label: "Projects / Media"
+                name: "items"
+                widget: "list"
+                allow_add: true
+                allow_remove: true
+                allow_reorder: true
+                collapsed: true
+                summary: "{{fields.title}}"
+                fields:
+                  - {label: "Title", name: "title", widget: "string"}
+                  - {label: "Category / Meta", name: "category", widget: "string", required: false}
+                  - label: "Media type"
+                    name: "media_type"
+                    widget: "select"
+                    options:
+                      - {label: "Image", value: "image"}
+                      - {label: "Uploaded Video", value: "video"}
+                      - {label: "External Embed", value: "embed"}
+                  - {label: "Image / Thumbnail", name: "image", widget: "image", required: false}
+                  - {label: "Upload Video", name: "video", widget: "file", required: false, hint: "For MP4/WebM uploads. Large videos may be better hosted separately."}
+                  - {label: "External Video / Embed URL", name: "video_url", widget: "string", required: false}
+                  - {label: "External Project URL", name: "external_url", widget: "string", required: false}
+                  - {label: "Description", name: "description", widget: "text", required: false}
+                  - {label: "Visible", name: "visible", widget: "boolean", default: true}
+                  - {label: "Featured", name: "featured", widget: "boolean", default: false, required: false}
+
+  - name: "uploads"
+    label: "Uploaded Media"
+    folder: "assets/uploads"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "File", name: "file", widget: "file"}
