@@ -33,7 +33,7 @@ function specialMediaMarkup(item, mode='special'){
   }
 
   if(type === 'embed' && embed){
-    if(mode === 'ai'){
+    if(mode === 'ai' || mode === 'talking'){
       // Adobe CCV is cross-origin, so the parent page cannot force the
       // player's internal video element to mute/loop. We therefore request
       // all three behaviors from the embedded player and keep the iframe
@@ -43,7 +43,7 @@ function specialMediaMarkup(item, mode='special'){
       const autoUrl = embed + (embed.includes('?') ? '&' : '?') + params;
       const ratio = String(item.aspect_ratio || '16:9');
       const orientation = ratio === '9:16' ? 'portrait' : 'landscape';
-      return `<div class="special-media special-embed ai-embed-live ai-media-${orientation}">
+      return `<div class="special-media special-embed ai-embed-live ${mode==='talking'?'talk-embed-live':''} ai-media-${orientation}" role="button" tabindex="0" aria-label="Open ${title} fullscreen">
         <iframe src="${esc(autoUrl)}" title="${title}" loading="eager" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen></iframe>
       </div>`;
     }
@@ -105,14 +105,19 @@ function renderSpecialHeader(section,index,kicker){
 }
 
 function renderAiDeck(section,index,items){
-  const cards=items.slice(0,7).map((item,i)=>`<article class="ai-card" data-deck-index="${i}" data-depth="${i}">
+  const cards=items.slice(0,9).map((item,i)=>`<article class="ai-card" data-deck-index="${i}" data-depth="${i}">
     <div class="ai-card-media">${specialMediaMarkup(item,'ai')}</div>
     <div class="ai-card-meta"><span>${String(i+1).padStart(2,'0')} / ${esc(item.category||'AI VIDEO')}</span><strong>${esc(item.title||'Untitled')}</strong></div>
   </article>`).join('');
   return `<section id="${esc(section.anchor)}" class="section managed-section special-section ai-section" data-presentation="ai-deck">
     ${renderSpecialHeader(section,index,'AI VIDEO')}
+    <div class="ai-deck-controls" aria-label="AI video navigation">
+      <button type="button" class="ai-deck-nav" data-ai-prev aria-label="Previous AI video"><span>←</span><b>PREVIOUS</b></button>
+      <span class="ai-deck-count" data-ai-count>01 / ${String(Math.max(items.length,1)).padStart(2,'0')}</span>
+      <button type="button" class="ai-deck-nav" data-ai-next aria-label="Next AI video"><b>NEXT</b><span>→</span></button>
+    </div>
     <div class="ai-deck" data-ai-deck>${cards}</div>
-    <div class="special-foot"><span>AI / GENERATIVE / EDIT / VFX</span><span>SCROLL TO SHIFT THE FRAME ↗</span></div>
+    <div class="special-foot"><span>AI / GENERATIVE / EDIT / VFX</span><span>CLICK ANYWHERE ON A VIDEO TO EXPAND ↗</span></div>
   </section>`;
 }
 
@@ -320,7 +325,12 @@ function setupAiDeck(){
   document.querySelectorAll('[data-ai-deck]').forEach(deck=>{
     const cards=[...deck.querySelectorAll('.ai-card')];
     if(!cards.length)return;
+    const section=deck.closest('.ai-section');
+    const prev=section?.querySelector('[data-ai-prev]');
+    const nextBtn=section?.querySelector('[data-ai-next]');
+    const count=section?.querySelector('[data-ai-count]');
     let active=0, timer=null, hovering=false;
+
     const paint=()=>{
       cards.forEach((card,i)=>{
         let rel=(i-active+cards.length)%cards.length;
@@ -328,20 +338,28 @@ function setupAiDeck(){
         const pos=rel===0?'active':rel===-1?'left':rel===1?'right':rel===-2?'far-left':rel===2?'far-right':'hidden';
         card.dataset.position=pos;
       });
+      if(count) count.textContent=`${String(active+1).padStart(2,'0')} / ${String(cards.length).padStart(2,'0')}`;
     };
-    const next=()=>{active=(active+1)%cards.length;paint();};
-    paint();
-    timer=setInterval(()=>{if(!hovering)next();},4200);
+    const go=(delta)=>{active=(active+delta+cards.length)%cards.length;paint();};
+    const resetTimer=()=>{
+      clearInterval(timer);
+      timer=setInterval(()=>{if(!hovering && !document.body.classList.contains('modal-open'))go(1);},5200);
+    };
+    paint(); resetTimer();
     deck.addEventListener('mouseenter',()=>hovering=true);
     deck.addEventListener('mouseleave',()=>hovering=false);
+    prev?.addEventListener('click',()=>{go(-1);resetTimer();});
+    nextBtn?.addEventListener('click',()=>{go(1);resetTimer();});
+    document.addEventListener('keydown',e=>{
+      if(e.key==='ArrowLeft' && !document.body.classList.contains('modal-open')){go(-1);resetTimer();}
+      if(e.key==='ArrowRight' && !document.body.classList.contains('modal-open')){go(1);resetTimer();}
+    });
 
-    // Clicking an individual AI card opens that exact video in a fullscreen
-    // portfolio lightbox while the card deck continues to autoplay muted.
     let modal=document.querySelector('.ai-video-lightbox');
     if(!modal){
       modal=document.createElement('div');
       modal.className='ai-video-lightbox';
-      modal.innerHTML=`<button class="ai-lightbox-close" type="button" aria-label="Close video">×</button><div class="ai-lightbox-stage"><div class="ai-lightbox-media"></div><div class="ai-lightbox-caption"></div></div>`;
+      modal.innerHTML=`<button class="ai-lightbox-close" type="button" aria-label="Close video">×</button><button class="ai-lightbox-prev" type="button" aria-label="Previous video">←</button><button class="ai-lightbox-next" type="button" aria-label="Next video">→</button><div class="ai-lightbox-stage"><div class="ai-lightbox-media"></div><div class="ai-lightbox-caption"></div></div>`;
       document.body.appendChild(modal);
       const close=()=>{
         modal.classList.remove('open');
@@ -350,56 +368,112 @@ function setupAiDeck(){
         if(holder) holder.innerHTML='';
       };
       modal.addEventListener('click',e=>{if(e.target===modal || e.target.closest('.ai-lightbox-close'))close();});
-      document.addEventListener('keydown',e=>{if(e.key==='Escape' && modal.classList.contains('open'))close();});
+      modal.querySelector('.ai-lightbox-prev').addEventListener('click',e=>{e.stopPropagation();go(-1);openCard(cards[active]);});
+      modal.querySelector('.ai-lightbox-next').addEventListener('click',e=>{e.stopPropagation();go(1);openCard(cards[active]);});
+      document.addEventListener('keydown',e=>{
+        if(!modal.classList.contains('open'))return;
+        if(e.key==='Escape')close();
+        if(e.key==='ArrowLeft'){go(-1);openCard(cards[active]);}
+        if(e.key==='ArrowRight'){go(1);openCard(cards[active]);}
+      });
     }
 
-    deck.addEventListener('click',e=>{
-      const card=e.target.closest('.ai-card'); if(!card)return;
-      const i=cards.indexOf(card);
-      if(i<0)return;
-      if(i!==active){active=i;paint();}
-      const iframe=card.querySelector('iframe');
+    const openCard=(card)=>{
+      const frame=card.querySelector('iframe');
+      const video=card.querySelector('video');
       const holder=modal.querySelector('.ai-lightbox-media');
       const caption=modal.querySelector('.ai-lightbox-caption');
-      if(!iframe || !holder)return;
-      const src=iframe.src;
-      const isPortrait=card.querySelector('.ai-media-portrait');
-      modal.classList.toggle('portrait',!!isPortrait);
-      const clone=document.createElement('iframe');
-      clone.src=src;
-      clone.title=iframe.title||'AI video';
-      clone.allow='autoplay; fullscreen; picture-in-picture; encrypted-media';
-      clone.allowFullscreen=true;
+      if(!holder)return;
+      const isPortrait=!!card.querySelector('.ai-media-portrait');
+      modal.classList.toggle('portrait',isPortrait);
       holder.innerHTML='';
-      holder.appendChild(clone);
+      if(frame){
+        const clone=document.createElement('iframe');
+        clone.src=frame.src;
+        clone.title=frame.title||'Portfolio video';
+        clone.allow='autoplay; fullscreen; picture-in-picture; encrypted-media';
+        clone.allowFullscreen=true;
+        holder.appendChild(clone);
+      } else if(video){
+        const clone=video.cloneNode(true);
+        clone.controls=true; clone.autoplay=true; clone.muted=false; clone.loop=true; clone.playsInline=true;
+        holder.appendChild(clone);
+        clone.play().catch(()=>{});
+      } else return;
       const title=card.querySelector('.ai-card-meta strong')?.textContent || 'AI Video';
       const category=card.querySelector('.ai-card-meta span')?.textContent || 'AI VIDEO';
       caption.innerHTML=`<span>${esc(category)}</span><strong>${esc(title)}</strong>`;
       modal.classList.add('open');
       document.body.classList.add('modal-open');
+    };
+
+    cards.forEach((card,i)=>{
+      const media=card.querySelector('.ai-card-media');
+      media?.addEventListener('click',e=>{
+        e.preventDefault(); e.stopPropagation();
+        active=i; paint(); openCard(card); resetTimer();
+      });
+      media?.addEventListener('keydown',e=>{
+        if(e.key==='Enter'||e.key===' '){e.preventDefault();active=i;paint();openCard(card);resetTimer();}
+      });
+      media?.setAttribute('role','button');
+      media?.setAttribute('tabindex','0');
+      media?.setAttribute('aria-label',`Open ${card.querySelector('.ai-card-meta strong')?.textContent||'AI video'} fullscreen`);
     });
   });
 }
-
 function setupTalkingHead(){
   document.querySelectorAll('[data-talking-stage]').forEach(stage=>{
     const cards=[...stage.querySelectorAll('.talk-card')];
-    cards.forEach(card=>{
+    cards.forEach((card,i)=>{
       card.addEventListener('pointermove',e=>{
         if(matchMedia('(pointer:coarse)').matches)return;
         const r=card.getBoundingClientRect();
         const x=(e.clientX-r.left)/r.width-.5;
         const y=(e.clientY-r.top)/r.height-.5;
-        card.style.setProperty('--rx',`${y*-4}deg`);
-        card.style.setProperty('--ry',`${x*5}deg`);
-        card.style.setProperty('--mx',`${x*24}px`);
-        card.style.setProperty('--my',`${y*18}px`);
+        card.style.setProperty('--rx',`${y*-3}deg`);
+        card.style.setProperty('--ry',`${x*4}deg`);
       });
-      card.addEventListener('pointerleave',()=>{card.style.setProperty('--rx','0deg');card.style.setProperty('--ry','0deg');card.style.setProperty('--mx','0px');card.style.setProperty('--my','0px');});
+      card.addEventListener('pointerleave',()=>{card.style.setProperty('--rx','0deg');card.style.setProperty('--ry','0deg');});
+      const media=card.querySelector('.special-media');
+      media?.setAttribute('role','button');
+      media?.setAttribute('tabindex','0');
+      media?.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();openTalkingLightbox(card);});
+      media?.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openTalkingLightbox(card);}});
     });
   });
 }
 
+function openTalkingLightbox(card){
+  let modal=document.querySelector('.talk-video-lightbox');
+  if(!modal){
+    modal=document.createElement('div');
+    modal.className='talk-video-lightbox ai-video-lightbox';
+    modal.innerHTML='<button class="ai-lightbox-close" type="button" aria-label="Close video">×</button><div class="ai-lightbox-stage"><div class="ai-lightbox-media"></div><div class="ai-lightbox-caption"></div></div>';
+    document.body.appendChild(modal);
+    const close=()=>{modal.classList.remove('open');document.body.classList.remove('modal-open');modal.querySelector('.ai-lightbox-media').innerHTML='';};
+    modal.addEventListener('click',e=>{if(e.target===modal||e.target.closest('.ai-lightbox-close'))close();});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('open'))close();});
+  }
+  const holder=modal.querySelector('.ai-lightbox-media');
+  const frame=card.querySelector('iframe');
+  const video=card.querySelector('video');
+  holder.innerHTML='';
+  if(frame){
+    const clone=document.createElement('iframe');
+    clone.src=frame.src;
+    clone.title=frame.title||'Talking head video';
+    clone.allow='autoplay; fullscreen; picture-in-picture; encrypted-media';
+    clone.allowFullscreen=true;
+    holder.appendChild(clone);
+  }else if(video){
+    const clone=video.cloneNode(true);clone.controls=true;clone.autoplay=true;clone.muted=false;clone.playsInline=true;holder.appendChild(clone);clone.play().catch(()=>{});
+  }else return;
+  const title=card.querySelector('.talk-card-meta strong')?.textContent||'Talking Head Video';
+  const cat=card.querySelector('.talk-card-meta span')?.textContent||'TALKING HEAD';
+  modal.querySelector('.ai-lightbox-caption').innerHTML=`<span>${esc(cat)}</span><strong>${esc(title)}</strong>`;
+  modal.classList.add('open');document.body.classList.add('modal-open');
+}
 function setupThreeShowcase(){
   document.querySelectorAll('[data-three-stage]').forEach(stage=>{
     const cards=[...stage.querySelectorAll('.three-card')];

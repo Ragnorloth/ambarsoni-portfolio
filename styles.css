@@ -122,3 +122,48 @@ body.modal-open{overflow:hidden}
 @media(prefers-reduced-motion:reduce){
   .ai-card,.three-card,.talk-card,.scroll-shuttle span{transition:none!important;animation:none!important}
 }
+
+/* V9 interaction polish — aligned stacks, full-surface video opening, AI navigation */
+.ai-deck-controls{max-width:1200px;margin:0 auto 8px;display:flex;align-items:center;justify-content:space-between;gap:18px;position:relative;z-index:20}
+.ai-deck-nav{appearance:none;border:1px solid rgba(217,255,69,.28);background:rgba(10,10,10,.72);color:#f2f1ed;border-radius:999px;min-width:132px;padding:11px 15px;display:inline-flex;align-items:center;justify-content:center;gap:12px;font:500 .58rem "DM Mono",monospace;letter-spacing:.08em;cursor:pointer;backdrop-filter:blur(12px);transition:background .25s ease,border-color .25s ease,transform .25s ease,box-shadow .25s ease}
+.ai-deck-nav span{font-size:1rem;line-height:1;color:var(--accent)}
+.ai-deck-nav:hover,.ai-deck-nav:focus-visible{background:rgba(217,255,69,.09);border-color:rgba(217,255,69,.65);transform:translateY(-2px);box-shadow:0 10px 35px rgba(0,0,0,.28);outline:none}
+.ai-deck-count{font:500 .58rem "DM Mono",monospace;letter-spacing:.12em;color:#777}
+
+/* The card itself is the click target. Cross-origin Adobe CCV iframes cannot
+   bubble clicks to the parent, so the embedded player stays visually live
+   while pointer input is owned by the card and opens the fullscreen view. */
+.ai-card-media,.talk-card .special-media{cursor:zoom-in}
+.ai-embed-live iframe{pointer-events:none}
+.ai-embed-live{cursor:zoom-in!important}
+.ai-video-lightbox .ai-lightbox-media iframe,.talk-video-lightbox .ai-lightbox-media iframe{pointer-events:auto}
+.ai-video-lightbox .ai-lightbox-media video,.talk-video-lightbox .ai-lightbox-media video{width:100%;height:100%;object-fit:contain;background:#050505;border-radius:16px;box-shadow:0 30px 100px rgba(0,0,0,.7)}
+.ai-lightbox-prev,.ai-lightbox-next{position:fixed;top:50%;z-index:10001;width:50px;height:50px;border:1px solid rgba(217,255,69,.3);border-radius:50%;background:rgba(8,8,8,.78);color:#fff;font:500 1.1rem "DM Mono",monospace;cursor:pointer;backdrop-filter:blur(12px);transition:transform .2s ease,background .2s ease,border-color .2s ease}
+.ai-lightbox-prev{left:24px}.ai-lightbox-next{right:24px}
+.ai-lightbox-prev:hover,.ai-lightbox-next:hover,.ai-lightbox-prev:focus-visible,.ai-lightbox-next:focus-visible{transform:translateY(-50%) scale(1.06);background:rgba(217,255,69,.12);border-color:rgba(217,255,69,.7);outline:none}
+.ai-lightbox-prev,.ai-lightbox-next{transform:translateY(-50%)}
+
+/* Talking-head cards are deliberately aligned from the first frame. Hover adds
+   depth/scale only; it must never repair a displaced card by moving it into place. */
+.talking-stage{align-items:stretch}
+.talking-section .talk-card:nth-child(2),
+.talking-section .talk-card:nth-child(3),
+.talking-section .talk-card:nth-child(n+4){transform:translate3d(0,0,0) rotate(0deg)}
+.talking-section .talk-card:hover,
+.talking-section .talk-card:nth-child(2):hover,
+.talking-section .talk-card:nth-child(3):hover,
+.talking-section .talk-card:nth-child(n+4):hover{transform:translate3d(0,0,55px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) scale(1.025);z-index:10}
+.talk-card .special-media iframe{pointer-events:none}
+
+@media(max-width:900px){
+  .ai-deck-controls{margin-top:4px}
+  .ai-deck-nav{min-width:112px}
+  .ai-lightbox-prev{left:10px}.ai-lightbox-next{right:10px}
+}
+@media(max-width:600px){
+  .ai-deck-controls{gap:8px}
+  .ai-deck-nav{min-width:0;padding:10px 12px;gap:7px}
+  .ai-deck-nav b{display:none}
+  .ai-deck-count{font-size:.52rem}
+  .ai-lightbox-prev,.ai-lightbox-next{width:42px;height:42px}
+}
