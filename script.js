@@ -144,6 +144,11 @@ function render3DShowcase(section,index,items){
   </article>`).join('');
   return `<section id="${esc(section.anchor)}" class="section managed-section special-section three-showcase-section" data-presentation="3d-showcase">
     ${renderSpecialHeader(section,index,'3D / BLENDER')}
+    <div class="three-deck-controls" aria-label="3D Blender navigation">
+      <button type="button" class="three-deck-nav" data-three-prev aria-label="Previous 3D Blender project"><span>←</span><b>PREVIOUS</b></button>
+      <span class="three-deck-count" data-three-count>01 / ${String(Math.max(items.length,1)).padStart(2,'0')}</span>
+      <button type="button" class="three-deck-nav" data-three-next aria-label="Next 3D Blender project"><b>NEXT</b><span>→</span></button>
+    </div>
     <div class="three-stage" data-three-stage>${cards}</div>
     <div class="special-foot"><span>BLENDER / CGI / PRODUCT / MOTION</span><span>FRAME SHIFT ↗</span></div>
   </section>`;
@@ -482,7 +487,12 @@ function setupThreeShowcase(){
   document.querySelectorAll('[data-three-stage]').forEach(stage=>{
     const cards=[...stage.querySelectorAll('.three-card')];
     if(!cards.length)return;
-    let active=Math.min(1,cards.length-1), timer=null, hover=false;
+    const section=stage.closest('.three-showcase-section');
+    const prev=section?.querySelector('[data-three-prev]');
+    const next=section?.querySelector('[data-three-next]');
+    const count=section?.querySelector('[data-three-count]');
+    let active=Math.min(2,cards.length-1), timer=null, hover=false;
+
     const paint=()=>{
       cards.forEach((card,i)=>{
         let rel=i-active;
@@ -490,11 +500,30 @@ function setupThreeShowcase(){
         if(rel<-2)rel+=cards.length;
         card.dataset.position=rel===0?'center':rel===-1?'left':rel===1?'right':rel===-2?'far-left':rel===2?'far-right':'hidden';
       });
+      if(count) count.textContent=`${String(active+1).padStart(2,'0')} / ${String(cards.length).padStart(2,'0')}`;
     };
+    const go=(delta)=>{
+      if(cards.length<2)return;
+      active=(active+delta+cards.length)%cards.length;
+      paint();
+    };
+    const resetTimer=()=>{
+      clearInterval(timer);
+      timer=setInterval(()=>{if(!hover && !document.body.classList.contains('modal-open'))go(1);},5000);
+    };
+
     paint();
-    timer=setInterval(()=>{if(!hover){active=(active+1)%cards.length;paint();}},5000);
+    resetTimer();
     stage.addEventListener('mouseenter',()=>hover=true);
     stage.addEventListener('mouseleave',()=>hover=false);
+    prev?.addEventListener('click',()=>{go(-1);resetTimer();});
+    next?.addEventListener('click',()=>{go(1);resetTimer();});
+
+    document.addEventListener('keydown',e=>{
+      if(document.body.classList.contains('modal-open'))return;
+      if(e.key==='ArrowLeft'){go(-1);resetTimer();}
+      if(e.key==='ArrowRight'){go(1);resetTimer();}
+    });
   });
 }
 

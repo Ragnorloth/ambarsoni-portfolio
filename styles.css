@@ -245,3 +245,58 @@ body.modal-open{overflow:hidden}
   .talk-card.talk-landscape{grid-column:auto}
   .talk-card.talk-portrait{width:min(100%,360px);justify-self:center}
 }
+
+
+/* V11 — 3D Blender manual navigation */
+.three-deck-controls{
+  max-width:1250px;
+  margin:0 auto 8px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  position:relative;
+  z-index:20;
+}
+.three-deck-nav{
+  appearance:none;
+  border:1px solid rgba(217,255,69,.28);
+  background:rgba(10,10,10,.72);
+  color:#f2f1ed;
+  border-radius:999px;
+  min-width:132px;
+  padding:11px 15px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  font:500 .58rem "DM Mono",monospace;
+  letter-spacing:.08em;
+  cursor:pointer;
+  backdrop-filter:blur(12px);
+  transition:background .25s ease,border-color .25s ease,transform .25s ease,box-shadow .25s ease;
+}
+.three-deck-nav span{font-size:1rem;line-height:1;color:var(--accent)}
+.three-deck-nav:hover,
+.three-deck-nav:focus-visible{
+  background:rgba(217,255,69,.09);
+  border-color:rgba(217,255,69,.65);
+  transform:translateY(-2px);
+  box-shadow:0 10px 35px rgba(0,0,0,.28);
+  outline:none;
+}
+.three-deck-count{
+  font:500 .58rem "DM Mono",monospace;
+  letter-spacing:.12em;
+  color:#777;
+}
+@media(max-width:900px){
+  .three-deck-controls{margin-top:4px}
+  .three-deck-nav{min-width:112px}
+}
+@media(max-width:600px){
+  .three-deck-controls{gap:8px}
+  .three-deck-nav{min-width:0;padding:10px 12px;gap:7px}
+  .three-deck-nav b{display:none}
+  .three-deck-count{font-size:.52rem}
+}
