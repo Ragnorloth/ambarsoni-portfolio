@@ -80,6 +80,20 @@
           "external_url": "",
           "description": "",
           "category": "AI Video · Generative · Editing"
+        },
+        {
+          "visible": true,
+          "featured": false,
+          "video_url": "https://www-ccv.adobe.io/v1/player/ccv/MVLqBc9suNs/embed?api_key=behance1&bgcolor=%23191919",
+          "media_type": "embed",
+          "title": "Whatsupwelness | Health Reduce | AI"
+        },
+        {
+          "visible": true,
+          "featured": false,
+          "title": "Mahakhumb | A short untold story",
+          "media_type": "embed",
+          "video_url": "https://www-ccv.adobe.io/v1/player/ccv/9tm_LPaH9nN/embed?api_key=behance1&bgcolor=%23191919"
         }
       ],
       "heading": "AI, in motion.",
