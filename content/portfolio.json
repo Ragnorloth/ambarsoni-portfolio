@@ -186,7 +186,7 @@
       "items": [
         {
           "video_url": "https://www-ccv.adobe.io/v1/player/ccv/PerLII6bcdX/embed?api_key=behance1&bgcolor=%23070707",
-          "featured": true,
+          "featured": false,
           "visible": true,
           "media_type": "embed",
           "title": "Trichologist | India Is a Humid Country ",
