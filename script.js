@@ -352,7 +352,7 @@ function setupAiDeck(){
     const go=(delta)=>{active=(active+delta+cards.length)%cards.length;paint();};
     const resetTimer=()=>{
       clearInterval(timer);
-      timer=setInterval(()=>{if(!hovering && !document.body.classList.contains('modal-open'))go(1);},5200);
+      timer=setInterval(()=>{if(!hovering && !document.body.classList.contains('modal-open'))go(1);},1000);
     };
     paint(); resetTimer();
     deck.addEventListener('mouseenter',()=>hovering=true);
@@ -509,7 +509,7 @@ function setupThreeShowcase(){
     };
     const resetTimer=()=>{
       clearInterval(timer);
-      timer=setInterval(()=>{if(!hover && !document.body.classList.contains('modal-open'))go(1);},5000);
+      timer=setInterval(()=>{if(!hover && !document.body.classList.contains('modal-open'))go(1);},1000);
     };
 
     paint();
