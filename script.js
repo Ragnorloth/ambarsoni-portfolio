@@ -293,14 +293,14 @@ function setupCaseCinema(){
   const hotspots=[...board.querySelectorAll('.case-hotspot')];
   const poses=[
     {x:0,y:0,s:.94,label:'01 / CASE STUDY'},
-    {x:-4,y:-2,s:1.02,label:'02 / SCRIPT + BRIEF'},
-    {x:7,y:-2,s:1.05,label:'03 / IDEATION + REFERENCES'},
-    {x:-6,y:4,s:1.08,label:'04 / VISUAL DEVELOPMENT'},
-    {x:7,y:5,s:1.11,label:'05 / 3D + ANIMATION'},
-    {x:-6,y:9,s:1.14,label:'06 / AFTER EFFECTS'},
-    {x:7,y:12,s:1.17,label:'07 / EDIT + SOUND'},
-    {x:-4,y:16,s:1.20,label:'08 / CAPTIONS + DELIVERY'},
-    {x:2,y:20,s:1.24,label:'09 / CASE FILE CLOSED'}
+    {x:5,y:-1,s:1.02,label:'02 / SCRIPT + BRIEF'},
+    {x:-6,y:-4,s:1.06,label:'03 / IDEATION + REFERENCES'},
+    {x:5,y:-7,s:1.09,label:'04 / VISUAL DEVELOPMENT'},
+    {x:-6,y:-10,s:1.12,label:'05 / 3D + ANIMATION'},
+    {x:5,y:-13,s:1.15,label:'06 / AFTER EFFECTS'},
+    {x:-6,y:-16,s:1.18,label:'07 / EDIT + SOUND'},
+    {x:4,y:-19,s:1.21,label:'08 / CAPTIONS + DELIVERY'},
+    {x:0,y:-22,s:1.25,label:'09 / CASE FILE CLOSED'}
   ];
   const clamp=(n,a=0,b=1)=>Math.max(a,Math.min(b,n));
   const ease=n=>n*n*(3-2*n);
