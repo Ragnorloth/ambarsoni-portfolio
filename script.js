@@ -185,7 +185,7 @@ function renderCaseStudy(section,index,items){
       </div>
     </div>
     <div class="case-board">
-      <div class="case-board-label">MY WORKFLOW <b>→</b> IDEA / BUILD / POLISH</div>
+      <div class="case-bulb" aria-hidden="true"><span class="case-bulb-wire"></span><span class="case-bulb-cap"></span><span class="case-bulb-glass"><i></i></span></div>\n      <div class="case-board-label">MY WORKFLOW <b>→</b> IDEA / BUILD / POLISH</div>
       <div class="case-thread" aria-hidden="true"></div>
       <div class="case-steps">${steps}</div>
       <div class="case-stamp">PROCESS<br>DOCUMENTED</div>
@@ -294,6 +294,19 @@ function setupInteractions(){
   setupAiDeck();
   setupTalkingHead();
   setupThreeShowcase();
+
+  const caseBulb=document.querySelector('.case-bulb');
+  if(caseBulb && !caseBulb.dataset.flickerReady){
+    caseBulb.dataset.flickerReady='true';
+    const flicker=()=>{
+      const glass=caseBulb.querySelector('.case-bulb-glass');
+      if(!glass) return;
+      glass.classList.add('is-flickering');
+      setTimeout(()=>glass.classList.remove('is-flickering'),120+Math.random()*180);
+      setTimeout(flicker,2800+Math.random()*5200);
+    };
+    setTimeout(flicker,1800+Math.random()*2600);
+  }
   setupScrollMotion();
   setupEnvelopeScroll();
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.08});
