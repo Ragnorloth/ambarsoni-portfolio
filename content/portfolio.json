@@ -3,78 +3,11 @@
     {
       "items": [
         {
-          "visible": true,
-          "featured": false,
-          "title": "Krishna Diaries",
-          "media_type": "embed",
-          "video_url": "https://www-ccv.adobe.io/v1/player/ccv/TrGnRn7Cbif/embed?api_key=behance1&bgcolor=%23070707"
-        },
-        {
-          "video_url": "https://www-ccv.adobe.io/v1/player/ccv/GgTFT3rjtU-/embed?api_key=behance1&bgcolor=%23191919",
-          "featured": true,
-          "visible": true,
-          "media_type": "embed",
-          "title": "Gayatri Mantra - SilverLining Astrology",
-          "video": "",
-          "image": "",
-          "external_url": "",
-          "description": "",
-          "category": "AI Video · Generative · Editing"
-        },
-        {
-          "video_url": "https://www-ccv.adobe.io/v1/player/ccv/EcyN2Hczkrk/embed?api_key=behance1&bgcolor=%23191919",
-          "featured": false,
-          "visible": true,
-          "media_type": "embed",
-          "title": "Miduty | Bangur Cement Accent Ai | Pigmentation Clear + Protection",
-          "video": "",
-          "image": "",
-          "external_url": "",
-          "description": "",
-          "category": "AI Video · Generative · Editing"
-        },
-        {
-          "video_url": "https://www-ccv.adobe.io/v1/player/ccv/VMAkj4Ekjhg/embed?api_key=behance1&bgcolor=%23191919",
-          "featured": false,
-          "visible": true,
-          "media_type": "embed",
-          "title": "O2Cure Air Purifier ",
-          "video": "",
-          "image": "",
-          "external_url": "",
-          "description": "",
-          "category": "AI Video · Generative · Editing"
-        },
-        {
-          "video_url": "https://www-ccv.adobe.io/v1/player/ccv/9SI7AvyoEVo/embed?api_key=behance1&bgcolor=%23191919",
-          "featured": false,
-          "visible": true,
-          "media_type": "embed",
-          "title": "Just Run",
-          "video": "",
-          "image": "",
-          "external_url": "",
-          "description": "",
-          "category": "AI Video · Generative · Editing"
-        },
-        {
           "video_url": "https://www-ccv.adobe.io/v1/player/ccv/-54g7ZISP_R/embed?api_key=behance1&bgcolor=%23191919",
           "featured": false,
           "visible": true,
           "media_type": "embed",
           "title": "Short AI Part of a short Film Named - Prehistoric Human",
-          "video": "",
-          "image": "",
-          "external_url": "",
-          "description": "",
-          "category": "AI Video · Generative · Editing"
-        },
-        {
-          "video_url": "https://www-ccv.adobe.io/v1/player/ccv/9hv5LrTCIxu/embed?api_key=behance1&bgcolor=%23191919",
-          "featured": false,
-          "visible": true,
-          "media_type": "embed",
-          "title": "Sera Naturals | Skincare",
           "video": "",
           "image": "",
           "external_url": "",
@@ -94,6 +27,13 @@
           "title": "Mahakhumb | A short untold story",
           "media_type": "embed",
           "video_url": "https://www-ccv.adobe.io/v1/player/ccv/9tm_LPaH9nN/embed?api_key=behance1&bgcolor=%23191919"
+        },
+        {
+          "visible": true,
+          "featured": false,
+          "media_type": "embed",
+          "video_url": "https://monkeyfilmedit.com/wp-content/uploads/2026/09/The-Zero-Work-AI-Glitch-Printing-Money-in-2026-.mp4",
+          "title": "Time Control | Automation"
         }
       ],
       "heading": "AI, in motion.",
@@ -108,6 +48,13 @@
     },
     {
       "items": [
+        {
+          "visible": true,
+          "featured": false,
+          "title": "Real Estate | Talking Head",
+          "video_url": "https://monkeyfilmedit.com/wp-content/uploads/2026/09/talking-head-freelancer.mp4",
+          "media_type": "embed"
+        },
         {
           "visible": true,
           "featured": false,
@@ -170,6 +117,13 @@
           "title": "Deyor | Tour & Travel package",
           "media_type": "embed",
           "video_url": "https://www-ccv.adobe.io/v1/player/ccv/8GssDv3QG3u/embed?api_key=behance1&bgcolor=%23191919"
+        },
+        {
+          "visible": true,
+          "featured": false,
+          "title": "Sample Edit | Motion Style",
+          "media_type": "embed",
+          "video_url": "https://monkeyfilmedit.com/wp-content/uploads/2026/09/AI-reel.-2mp4.mp4"
         }
       ],
       "heading": "People, on screen.",
