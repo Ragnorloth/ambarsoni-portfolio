@@ -314,7 +314,7 @@ function setupCaseCinema(){
     camera.style.setProperty('--cam-y',(A.y+(B.y-A.y)*t)+'vh');
     camera.style.setProperty('--cam-s',(A.s+(B.s-A.s)*t).toFixed(3));
     hotspots.forEach((el,i)=>{
-      const threshold=.17+i*.085;
+      const threshold=.08+i*.105;
       el.classList.toggle('case-revealed',p>threshold);
       el.style.setProperty('--case-local',clamp((p-threshold)/.13).toFixed(3));
     });
