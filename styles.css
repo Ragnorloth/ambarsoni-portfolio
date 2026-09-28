@@ -167,3 +167,81 @@ body.modal-open{overflow:hidden}
   .ai-deck-count{font-size:.52rem}
   .ai-lightbox-prev,.ai-lightbox-next{width:42px;height:42px}
 }
+
+
+/* V10 — Talking Head: resolution-aware, orderly video grid */
+.talking-section{background:#090909}
+.talking-stage{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:24px;
+  align-items:start;
+  min-height:0;
+  padding:8px 0 12px;
+  transform:none;
+  transform-style:flat;
+}
+.talk-card,
+.talk-card.talk-primary{
+  position:relative;
+  width:100%;
+  min-height:0;
+  margin:0;
+  transform:none;
+  rotate:none;
+  transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease,filter .35s ease;
+  transform-style:preserve-3d;
+  align-self:start;
+}
+.talk-card.talk-portrait{aspect-ratio:9/16}
+.talk-card.talk-landscape{aspect-ratio:16/9;grid-column:span 2}
+.talk-card:nth-child(n){transform:none}
+.talk-card:after{inset:10px -8px -8px 8px}
+.talk-card .special-media{
+  width:100%;
+  height:100%;
+  min-height:0;
+  aspect-ratio:inherit;
+  border:1px solid rgba(255,255,255,.11);
+  border-radius:4px;
+  background:#101010;
+  overflow:hidden;
+}
+.talk-card .special-media iframe{
+  width:100%;
+  height:100%;
+  min-height:0;
+  display:block;
+  border:0;
+}
+.talk-card .special-poster,
+.talk-card .special-video{width:100%;height:100%;display:block;object-fit:cover}
+.talk-card:hover{
+  transform:translate3d(0,-4px,0) scale(1.012)!important;
+  z-index:10;
+  box-shadow:0 28px 70px rgba(0,0,0,.48);
+  filter:brightness(1.04);
+}
+.talk-card .special-media{cursor:zoom-in}
+.talk-card-meta{
+  left:10px;right:10px;bottom:10px;
+  padding:28px 10px 10px;
+  background:linear-gradient(transparent,rgba(0,0,0,.9));
+}
+.talk-card-meta strong{font-size:.72rem;line-height:1.25}
+.talk-card-meta span{font-size:.48rem}
+
+/* Keep the grid clean at intermediate widths. */
+@media(max-width:1100px){
+  .talking-stage{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+  .talk-card.talk-landscape{grid-column:span 2}
+}
+@media(max-width:900px){
+  .talking-stage{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+  .talk-card.talk-landscape{grid-column:span 2}
+}
+@media(max-width:600px){
+  .talking-stage{grid-template-columns:1fr;gap:18px}
+  .talk-card.talk-landscape{grid-column:auto}
+  .talk-card.talk-portrait{width:min(100%,360px);justify-self:center}
+}

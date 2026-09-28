@@ -27,7 +27,7 @@ function specialMediaMarkup(item, mode='special'){
 
   if(type === 'video' && video){
     return `<div class="special-media local-video-wrap">
-      <video class="special-video" src="${esc(video)}" ${image ? `poster="${esc(image)}"` : ''} muted autoplay loop playsinline preload="metadata" data-autoplay-video></video>
+      <video class="special-video" src="${esc(video)}" ${image ? `poster="${esc(image)}"` : ''} muted autoplay loop playsinline preload="auto" data-autoplay-video></video>
       <button class="media-mute" type="button" aria-label="Unmute video" aria-pressed="false"><span class="mute-icon">◌</span><span class="mute-label">UNMUTE</span></button>
     </div>`;
   }
@@ -122,14 +122,18 @@ function renderAiDeck(section,index,items){
 }
 
 function renderTalkingHead(section,index,items){
-  const cards=items.slice(0,6).map((item,i)=>`<article class="talk-card ${i===0?'talk-primary':''}" data-talk-index="${i}">
-    ${specialMediaMarkup(item,'talking')}
-    <div class="talk-card-meta"><span>${String(i+1).padStart(2,'0')} / ${esc(item.category||'TALKING HEAD')}</span><strong>${esc(item.title||'Untitled')}</strong></div>
-  </article>`).join('');
+  const cards=items.map((item,i)=>{
+    const ratio=String(item.aspect_ratio||'16:9');
+    const orientation=ratio==='9:16'?'portrait':'landscape';
+    return `<article class="talk-card talk-${orientation}" data-talk-index="${i}" data-orientation="${orientation}">
+      ${specialMediaMarkup(item,'talking')}
+      <div class="talk-card-meta"><span>${String(i+1).padStart(2,'0')} / ${esc(item.category||'TALKING HEAD')}</span><strong>${esc(item.title||'Untitled')}</strong></div>
+    </article>`;
+  }).join('');
   return `<section id="${esc(section.anchor)}" class="section managed-section special-section talking-section" data-presentation="talking-head">
     ${renderSpecialHeader(section,index,'TALKING HEAD')}
     <div class="talking-stage" data-talking-stage>${cards}</div>
-    <div class="special-foot"><span>AUTO / MUTED / LOOP</span><span>HOVER TO EXPAND · MOVE THE POINTER ↗</span></div>
+    <div class="special-foot"><span>AUTO / MUTED / LOOP</span><span>CLICK ANYWHERE TO EXPAND ↗</span></div>
   </section>`;
 }
 
