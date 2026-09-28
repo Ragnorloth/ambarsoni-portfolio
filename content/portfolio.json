@@ -3,6 +3,13 @@
     {
       "items": [
         {
+          "visible": true,
+          "featured": false,
+          "media_type": "embed",
+          "video_url": "https://monkeyfilmedit.com/wp-content/uploads/2026/09/The-Zero-Work-AI-Glitch-Printing-Money-in-2026-.mp4",
+          "title": "Time Control | Automation"
+        },
+        {
           "video_url": "https://www-ccv.adobe.io/v1/player/ccv/-54g7ZISP_R/embed?api_key=behance1&bgcolor=%23191919",
           "featured": false,
           "visible": true,
@@ -27,13 +34,6 @@
           "title": "Mahakhumb | A short untold story",
           "media_type": "embed",
           "video_url": "https://www-ccv.adobe.io/v1/player/ccv/9tm_LPaH9nN/embed?api_key=behance1&bgcolor=%23191919"
-        },
-        {
-          "visible": true,
-          "featured": false,
-          "media_type": "embed",
-          "video_url": "https://monkeyfilmedit.com/wp-content/uploads/2026/09/The-Zero-Work-AI-Glitch-Printing-Money-in-2026-.mp4",
-          "title": "Time Control | Automation"
         }
       ],
       "heading": "AI, in motion.",
@@ -149,18 +149,6 @@
           "external_url": "",
           "description": "",
           "category": "Reel Short Form"
-        },
-        {
-          "video_url": "https://www-ccv.adobe.io/v1/player/ccv/5vpwnRGAgkt/embed?api_key=behance1&bgcolor=%23070707",
-          "featured": false,
-          "visible": true,
-          "media_type": "embed",
-          "title": "Protien for your Hair",
-          "video": "",
-          "image": "",
-          "external_url": "",
-          "description": "",
-          "category": "Product Story | Hair Care Brand 3TENX"
         },
         {
           "video_url": "https://www-ccv.adobe.io/v1/player/ccv/BaCXL6RfrEJ/embed?api_key=behance1&bgcolor=%23070707",
@@ -279,18 +267,6 @@
           "title": "Graphic Design — 006",
           "video": "",
           "image": "assets/graphics/006.webp",
-          "external_url": "",
-          "description": "",
-          "category": "Graphic Design"
-        },
-        {
-          "video_url": "",
-          "featured": false,
-          "visible": true,
-          "media_type": "image",
-          "title": "Graphic Design — 007",
-          "video": "",
-          "image": "assets/graphics/007.webp",
           "external_url": "",
           "description": "",
           "category": "Graphic Design"
