@@ -154,6 +154,47 @@ function render3DShowcase(section,index,items){
   </section>`;
 }
 
+
+function renderCaseStudy(section,index,items){
+  const steps=items.slice(0,8).map((item,i)=>{
+    const tilt=[-2.2,1.6,-1.3,2.4,-1.8,1.2, -1.4, 2][i] || 0;
+    const note=item.note||'';
+    return `<article class="case-pin case-pin-${i+1} reveal" style="--case-tilt:${tilt}deg">
+      <span class="case-pin-dot" aria-hidden="true"></span>
+      <div class="case-paper">
+        <div class="case-paper-top"><span>${String(i+1).padStart(2,'0')}</span><b>${esc(item.phase||'WORKFLOW')}</b></div>
+        ${item.image?`<div class="case-image-wrap"><img src="${esc(item.image)}" alt="${esc(item.title||'Workflow step')}" loading="lazy"></div>`:''}
+        <div class="case-copy">
+          <h3>${esc(item.title||'Untitled')}</h3>
+          <p>${esc(item.description||'')}</p>
+          ${item.tools?`<div class="case-tools">${item.tools.map(t=>`<span>${esc(t)}</span>`).join('')}</div>`:''}
+          ${note?`<small>${esc(note)}</small>`:''}
+        </div>
+      </div>
+    </article>`;
+  }).join('');
+  return `<section id="${esc(section.anchor)}" class="section managed-section case-study-section" data-presentation="case-study">
+    <div class="case-study-head">
+      <div>
+        <span class="eyebrow">${esc(section.eyebrow||'03 / CASE STUDY')}</span>
+        <h2>${esc(section.heading||'Behind the edit.')}</h2>
+      </div>
+      <div class="case-intro">
+        <span class="case-file">CASE FILE / 001</span>
+        <p>${esc(section.description||'From brief to final frame — a look at the decisions, tools and craft behind the work.')}</p>
+      </div>
+    </div>
+    <div class="case-board">
+      <div class="case-board-label">MY WORKFLOW <b>→</b> IDEA / BUILD / POLISH</div>
+      <div class="case-thread" aria-hidden="true"></div>
+      <div class="case-steps">${steps}</div>
+      <div class="case-stamp">PROCESS<br>DOCUMENTED</div>
+      <div class="case-board-note">The final video is only the visible part.<br><em>The process is where the story takes shape.</em></div>
+    </div>
+    <div class="special-foot case-study-foot"><span>BRIEF / RESEARCH / EDIT / MOTION / SOUND / DELIVERY</span><span>SCROLL TO FOLLOW THE PROCESS ↘</span></div>
+  </section>`;
+}
+
 function renderSection(section,index){
   const items=(section.items||[]).filter(x=>x.visible!==false);
   if(!items.length) return '';
@@ -161,6 +202,7 @@ function renderSection(section,index){
   if(presentation==='ai-deck') return renderAiDeck(section,index,items);
   if(presentation==='talking-head') return renderTalkingHead(section,index,items);
   if(presentation==='3d-showcase') return render3DShowcase(section,index,items);
+  if(presentation==='case-study') return renderCaseStudy(section,index,items);
   return renderStandardSection(section,index,items);
 }
 
