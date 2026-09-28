@@ -449,3 +449,62 @@ body.modal-open{overflow:hidden}
   .case-camera{inset:-25vh -42vw!important}
   .case-blackboard{width:390vw!important;height:260vh!important;min-width:1400px!important}
 }
+
+/* ===== CASE CINEMA V3 / TRUE LOCKED VIEWPORT ===== */
+.case-cinema{background:#151613!important}
+.case-cinema-sticky{
+  background:
+    radial-gradient(circle at 12% 18%,rgba(255,255,255,.055) 0 1px,transparent 2px),
+    radial-gradient(circle at 77% 70%,rgba(255,255,255,.035) 0 1px,transparent 2px),
+    linear-gradient(135deg,#20211f,#111211 45%,#181a18)!important;
+  background-size:38px 38px,57px 57px,100% 100%!important;
+}
+.case-camera{
+  position:absolute!important;
+  inset:0!important;
+  width:100vw!important;
+  height:100vh!important;
+  overflow:hidden!important;
+  display:block!important;
+  transform:none!important;
+}
+.case-blackboard{
+  position:absolute!important;
+  left:50%!important;
+  top:50%!important;
+  width:300vw!important;
+  height:270vh!important;
+  min-width:2400px!important;
+  min-height:1500px!important;
+  transform:
+    translate3d(calc(-50% + var(--cam-x,0vw)),calc(-50% + var(--cam-y,0vh)),0)
+    scale(var(--cam-s,.94))!important;
+  transform-origin:center center!important;
+  will-change:transform!important;
+}
+.case-cinema-vignette{
+  position:absolute!important;
+  inset:0!important;
+  z-index:30!important;
+  pointer-events:none!important;
+}
+.case-camera-readout{z-index:40!important}
+
+/* Keep every focal move inside the physical board. */
+.case-cinema-scroll{height:980vh!important;background:#151613!important}
+@media(max-width:900px){
+  .case-blackboard{
+    width:390vw!important;
+    height:310vh!important;
+    min-width:2200px!important;
+    min-height:1600px!important;
+  }
+}
+@media(max-width:650px){
+  .case-blackboard{
+    width:520vw!important;
+    height:370vh!important;
+    min-width:2100px!important;
+    min-height:1700px!important;
+  }
+}
