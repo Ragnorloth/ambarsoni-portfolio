@@ -21,7 +21,8 @@
           "external_url": "",
           "description": "",
           "visible": true,
-          "featured": true
+          "featured": true,
+          "aspect_ratio": "16:9"
         },
         {
           "title": "AI Video — Generative Film 02",
@@ -33,7 +34,8 @@
           "external_url": "",
           "description": "",
           "visible": true,
-          "featured": false
+          "featured": false,
+          "aspect_ratio": "16:9"
         },
         {
           "title": "AI Video — Generative Film 03",
@@ -45,7 +47,8 @@
           "external_url": "",
           "description": "",
           "visible": true,
-          "featured": false
+          "featured": false,
+          "aspect_ratio": "16:9"
         },
         {
           "title": "AI Video — Generative Film 04",
@@ -57,7 +60,8 @@
           "external_url": "",
           "description": "",
           "visible": true,
-          "featured": false
+          "featured": false,
+          "aspect_ratio": "16:9"
         },
         {
           "title": "AI Video — Generative Film 05",
@@ -69,7 +73,8 @@
           "external_url": "",
           "description": "",
           "visible": true,
-          "featured": false
+          "featured": false,
+          "aspect_ratio": "16:9"
         },
         {
           "title": "AI Video — Vertical AI Reel",
@@ -81,7 +86,8 @@
           "external_url": "",
           "description": "",
           "visible": true,
-          "featured": false
+          "featured": false,
+          "aspect_ratio": "9:16"
         }
       ]
     },

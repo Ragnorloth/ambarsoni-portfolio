@@ -33,13 +33,17 @@ function specialMediaMarkup(item, mode='special'){
   }
 
   if(type === 'embed' && embed){
-    // AI Video deck: render the Adobe CCV player immediately instead of a
-    // click-to-load placeholder. This makes the active AI card visibly load
-    // its actual player on page load. Autoplay is requested, but the browser
-    // / embedded player may still require user interaction for audible media.
     if(mode === 'ai'){
-      const autoUrl = embed + (embed.includes('?') ? '&' : '?') + 'autoplay=1';
-      return `<div class="special-media special-embed ai-embed-live">
+      // Adobe CCV is cross-origin, so the parent page cannot force the
+      // player's internal video element to mute/loop. We therefore request
+      // all three behaviors from the embedded player and keep the iframe
+      // filling the complete card. Browsers allow muted autoplay more often
+      // than audible autoplay.
+      const params = 'autoplay=1&muted=1&loop=1';
+      const autoUrl = embed + (embed.includes('?') ? '&' : '?') + params;
+      const ratio = String(item.aspect_ratio || '16:9');
+      const orientation = ratio === '9:16' ? 'portrait' : 'landscape';
+      return `<div class="special-media special-embed ai-embed-live ai-media-${orientation}">
         <iframe src="${esc(autoUrl)}" title="${title}" loading="eager" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen></iframe>
       </div>`;
     }
@@ -317,7 +321,6 @@ function setupAiDeck(){
     const cards=[...deck.querySelectorAll('.ai-card')];
     if(!cards.length)return;
     let active=0, timer=null, hovering=false;
-    const positions=['far-left','left','active','right','far-right'];
     const paint=()=>{
       cards.forEach((card,i)=>{
         let rel=(i-active+cards.length)%cards.length;
@@ -331,10 +334,49 @@ function setupAiDeck(){
     timer=setInterval(()=>{if(!hovering)next();},4200);
     deck.addEventListener('mouseenter',()=>hovering=true);
     deck.addEventListener('mouseleave',()=>hovering=false);
+
+    // Clicking an individual AI card opens that exact video in a fullscreen
+    // portfolio lightbox while the card deck continues to autoplay muted.
+    let modal=document.querySelector('.ai-video-lightbox');
+    if(!modal){
+      modal=document.createElement('div');
+      modal.className='ai-video-lightbox';
+      modal.innerHTML=`<button class="ai-lightbox-close" type="button" aria-label="Close video">×</button><div class="ai-lightbox-stage"><div class="ai-lightbox-media"></div><div class="ai-lightbox-caption"></div></div>`;
+      document.body.appendChild(modal);
+      const close=()=>{
+        modal.classList.remove('open');
+        document.body.classList.remove('modal-open');
+        const holder=modal.querySelector('.ai-lightbox-media');
+        if(holder) holder.innerHTML='';
+      };
+      modal.addEventListener('click',e=>{if(e.target===modal || e.target.closest('.ai-lightbox-close'))close();});
+      document.addEventListener('keydown',e=>{if(e.key==='Escape' && modal.classList.contains('open'))close();});
+    }
+
     deck.addEventListener('click',e=>{
       const card=e.target.closest('.ai-card'); if(!card)return;
       const i=cards.indexOf(card);
-      if(i>=0 && i!==active){active=i;paint();}
+      if(i<0)return;
+      if(i!==active){active=i;paint();}
+      const iframe=card.querySelector('iframe');
+      const holder=modal.querySelector('.ai-lightbox-media');
+      const caption=modal.querySelector('.ai-lightbox-caption');
+      if(!iframe || !holder)return;
+      const src=iframe.src;
+      const isPortrait=card.querySelector('.ai-media-portrait');
+      modal.classList.toggle('portrait',!!isPortrait);
+      const clone=document.createElement('iframe');
+      clone.src=src;
+      clone.title=iframe.title||'AI video';
+      clone.allow='autoplay; fullscreen; picture-in-picture; encrypted-media';
+      clone.allowFullscreen=true;
+      holder.innerHTML='';
+      holder.appendChild(clone);
+      const title=card.querySelector('.ai-card-meta strong')?.textContent || 'AI Video';
+      const category=card.querySelector('.ai-card-meta span')?.textContent || 'AI VIDEO';
+      caption.innerHTML=`<span>${esc(category)}</span><strong>${esc(title)}</strong>`;
+      modal.classList.add('open');
+      document.body.classList.add('modal-open');
     });
   });
 }
