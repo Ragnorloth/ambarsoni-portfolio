@@ -59,6 +59,9 @@ collections:
               - {label: "Show in navigation", name: "show_in_nav", widget: "boolean", default: true}
               - {label: "Navigation label", name: "nav_label", widget: "string", required: false}
               - {label: "Show 3D process line", name: "process", widget: "boolean", default: false, required: false}
+              - {label: "Case closing title", name: "case_closing_title", widget: "string", required: false, hint: "Used by the cinematic Case Study closing scene."}
+              - {label: "Case closing message", name: "case_closing_text", widget: "text", required: false}
+              - {label: "Case closing portrait", name: "case_closing_image", widget: "image", required: false, hint: "Portrait shown in the final circular greenery scene."}
               - label: "Visual Presentation"
                 name: "presentation"
                 widget: "select"
@@ -69,6 +72,7 @@ collections:
                   - {label: "AI Video Card Deck", value: "ai-deck"}
                   - {label: "Talking Head — Floating", value: "talking-head"}
                   - {label: "3D / Blender — Layered Showcase", value: "3d-showcase"}
+                  - {label: "Case Study — Cinematic Workflow", value: "case-study"}
               - label: "Projects / Media"
                 name: "items"
                 widget: "list"
@@ -94,6 +98,11 @@ collections:
                   - {label: "Description", name: "description", widget: "text", required: false}
                   - {label: "Visible", name: "visible", widget: "boolean", default: true}
                   - {label: "Featured", name: "featured", widget: "boolean", default: false, required: false}
+                  - {label: "Workflow phase", name: "phase", widget: "string", required: false, hint: "Example: 01 / SCRIPTING"}
+                  - {label: "Workflow note", name: "note", widget: "text", required: false}
+                  - {label: "Tools", name: "tools", widget: "list", required: false}
+                  - {label: "Case visual", name: "visual", widget: "select", required: false, options: [script, references, paper, blender, ae, edit, captions]}
+                  - {label: "Script hook", name: "script_hook", widget: "string", required: false}
 
   - name: "uploads"
     label: "Uploaded Media"
