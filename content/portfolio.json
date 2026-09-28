@@ -264,6 +264,13 @@
     {
       "items": [
         {
+          "visible": true,
+          "featured": false,
+          "title": "Graphic Design - 056",
+          "media_type": "image",
+          "image": "/assets/uploads/culinary-opunjab.png"
+        },
+        {
           "video_url": "",
           "featured": false,
           "visible": true,
@@ -276,6 +283,27 @@
           "category": "Graphic Design"
         },
         {
+          "visible": true,
+          "featured": false,
+          "title": "Graphic Design - 060",
+          "image": "/assets/uploads/culinary-opunjab.png",
+          "media_type": "image"
+        },
+        {
+          "visible": true,
+          "featured": false,
+          "title": "Graphic Design - 057",
+          "media_type": "image",
+          "image": "/assets/uploads/01.jpg"
+        },
+        {
+          "visible": true,
+          "featured": false,
+          "title": "Graphic Design - 058",
+          "media_type": "image",
+          "image": "/assets/uploads/3.jpeg"
+        },
+        {
           "video_url": "",
           "featured": false,
           "visible": true,
@@ -286,6 +314,13 @@
           "external_url": "",
           "description": "",
           "category": "Graphic Design"
+        },
+        {
+          "visible": true,
+          "featured": false,
+          "title": "Graphic Design - 059",
+          "media_type": "image",
+          "image": "/assets/uploads/gauraiya-post-gausevva.jpg"
         },
         {
           "video_url": "",
@@ -838,41 +873,6 @@
           "external_url": "",
           "description": "",
           "category": "Graphic Design"
-        },
-        {
-          "visible": true,
-          "featured": false,
-          "title": "Graphic Design - 056",
-          "media_type": "image",
-          "image": "/assets/uploads/culinary-opunjab.png"
-        },
-        {
-          "visible": true,
-          "featured": false,
-          "title": "Graphic Design - 057",
-          "media_type": "image",
-          "image": "/assets/uploads/01.jpg"
-        },
-        {
-          "visible": true,
-          "featured": false,
-          "title": "Graphic Design - 058",
-          "media_type": "image",
-          "image": "/assets/uploads/3.jpeg"
-        },
-        {
-          "visible": true,
-          "featured": false,
-          "title": "Graphic Design - 059",
-          "media_type": "image",
-          "image": "/assets/uploads/gauraiya-post-gausevva.jpg"
-        },
-        {
-          "visible": true,
-          "featured": false,
-          "title": "Graphic Design - 060",
-          "image": "/assets/uploads/culinary-opunjab.png",
-          "media_type": "image"
         }
       ],
       "heading": "Static work, sharp thinking.",
