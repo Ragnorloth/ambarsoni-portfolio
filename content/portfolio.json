@@ -168,84 +168,113 @@
       "items": [
         {
           "visible": true,
-          "phase": "01 / BRIEF",
-          "title": "Brief & Direction",
-          "description": "Start with the objective, audience, platform and the one idea the edit must make impossible to miss.",
+          "phase": "01 / SCRIPTING",
+          "title": "Start with the story.",
+          "description": "Turn a loose idea into a clear hook, narrative, shot direction and message before the timeline gets involved.",
           "tools": [
-            "Brief",
-            "Audience",
-            "Hook"
+            "Script",
+            "Hook",
+            "Story beats"
           ],
-          "image": "/assets/uploads/screenshot-2026-09-28-174223.png",
-          "note": "What needs to be felt, understood or remembered?"
+          "note": "The edit starts before Premiere Pro.",
+          "visual": "script",
+          "script_hook": "What is the one thing the viewer should remember?"
         },
         {
           "visible": true,
-          "phase": "02 / RESEARCH",
-          "title": "References & Rhythm",
-          "description": "Collect visual references, pacing cues, transitions, typography and sound ideas before touching the timeline.",
+          "phase": "02 / IDEATION",
+          "title": "Build the visual world.",
+          "description": "Explore references for characters, environments, lighting, framing, colour and the visual language of the piece.",
           "tools": [
             "Moodboard",
             "References",
-            "Shot Plan"
+            "AI"
           ],
-          "image": "/assets/uploads/screenshot-2026-09-28-162028.png",
-          "note": "Direction first. Effects second."
+          "note": "Reference first. Execution second.",
+          "visual": "references"
         },
         {
           "visible": true,
-          "phase": "03 / ASSETS",
-          "title": "Build the Visual Kit",
-          "description": "Organise footage, selects, AI generations, 3D elements, graphics and reusable design systems so the edit stays fast.",
+          "phase": "03 / VISUAL DEVELOPMENT",
+          "title": "Develop the look.",
+          "description": "Create or refine the visual assets that will carry the story — from AI-generated imagery and character concepts to custom graphic directions.",
           "tools": [
-            "Premiere Pro",
-            "AI",
-            "Blender"
+            "AI visuals",
+            "Design",
+            "Art direction"
           ],
-          "image": "/assets/uploads/screenshot-2026-09-28-174126.png",
-          "note": "Every asset has a job."
+          "note": "Every frame needs a reason to exist.",
+          "visual": "paper"
         },
         {
           "visible": true,
-          "phase": "04 / EDIT",
-          "title": "Story, Pace & Cuts",
-          "description": "Shape the narrative in the timeline — hook, build, payoff — then refine timing, captions, framing and transitions.",
+          "phase": "04 / 3D + ANIMATION",
+          "title": "Build the moving parts.",
+          "description": "Set up 3D environments, cameras, lighting and animation when the story needs depth that a flat frame cannot provide.",
           "tools": [
-            "Premiere Pro",
-            "Captions",
-            "Pacing"
+            "Blender",
+            "3D",
+            "Camera",
+            "Animation"
           ],
-          "image": "/assets/uploads/screenshot-2026-09-28-161922.png",
-          "note": "Cut for attention, not just for time."
+          "note": "Make the world believable, then make it move.",
+          "visual": "blender"
         },
         {
           "visible": true,
-          "phase": "05 / MOTION",
-          "title": "Motion, VFX & Composite",
-          "description": "Add the visual treatment: motion graphics, compositing, 3D integration, camera moves and effects that support the story.",
+          "phase": "05 / AFTER EFFECTS",
+          "title": "Bring everything together.",
+          "description": "Composite assets, animate typography, add VFX, transitions and motion systems, then refine the visual rhythm.",
           "tools": [
             "After Effects",
-            "Blender",
+            "Motion",
             "VFX"
           ],
-          "image": "/assets/uploads/screenshot-2026-09-28-161936.png",
-          "note": "Make the effect serve the idea."
+          "note": "Polish the idea without hiding it.",
+          "visual": "ae"
         },
         {
           "visible": true,
-          "phase": "06 / FINISH",
-          "title": "Sound, Color & Delivery",
-          "description": "Finish the piece with sound design, music balance, color polish, quality control and the correct export for its platform.",
+          "phase": "06 / EDITING + SOUND",
+          "title": "Shape the final story.",
+          "description": "Build the cut in Premiere Pro, tighten pacing, design sound, balance music and voice, then review every beat.",
           "tools": [
+            "Premiere Pro",
+            "Sound",
             "SFX",
-            "Color",
+            "Color"
+          ],
+          "note": "Timing is storytelling.",
+          "visual": "edit"
+        },
+        {
+          "visible": true,
+          "phase": "07 / CAPTIONS",
+          "title": "Make every word land.",
+          "description": "Generate, clean and style captions with Kalakkar.io, then bring them back into the edit for final timing and readability.",
+          "tools": [
+            "Kalakkar.io",
+            "Captions",
             "QC"
           ],
-          "image": "/assets/uploads/screenshot-2026-09-28-161951.png",
-          "note": "One last pass before it goes live."
+          "note": "Accessibility should still feel designed.",
+          "visual": "captions"
+        },
+        {
+          "visible": true,
+          "phase": "08 / DELIVERY",
+          "title": "Final review. Final frame.",
+          "description": "Check the complete piece for picture, sound, captions, branding and export settings before it leaves the project.",
+          "tools": [
+            "Review",
+            "Export",
+            "Delivery"
+          ],
+          "note": "Then it is ready for the world.",
+          "visual": "paper"
         }
       ],
-      "heading": "Behind the edit.",
+      "heading": "From idea to final frame.",
       "theme": "dark",
       "eyebrow": "03 / CASE STUDY",
       "show_in_nav": true,
@@ -253,7 +282,10 @@
       "anchor": "case-study",
       "nav_label": "Case Study",
       "presentation": "case-study",
-      "description": "A project is more than the final frame. This is the workflow I use to turn an idea into a polished visual story."
+      "description": "A behind-the-scenes trail through scripting, ideation, visual development, 3D, motion, editing, captions and delivery.",
+      "case_closing_title": "Looking forward to connect.",
+      "case_closing_text": "For creativity, collaborations or just a conversation — let’s connect.",
+      "case_closing_image": "assets/profile-ambar.webp"
     },
     {
       "items": [
