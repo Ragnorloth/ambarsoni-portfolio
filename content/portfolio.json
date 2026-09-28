@@ -167,6 +167,97 @@
     {
       "items": [
         {
+          "visible": true,
+          "phase": "01 / BRIEF",
+          "title": "Brief & Direction",
+          "description": "Start with the objective, audience, platform and the one idea the edit must make impossible to miss.",
+          "tools": [
+            "Brief",
+            "Audience",
+            "Hook"
+          ],
+          "image": "/assets/uploads/screenshot-2026-09-28-174223.png",
+          "note": "What needs to be felt, understood or remembered?"
+        },
+        {
+          "visible": true,
+          "phase": "02 / RESEARCH",
+          "title": "References & Rhythm",
+          "description": "Collect visual references, pacing cues, transitions, typography and sound ideas before touching the timeline.",
+          "tools": [
+            "Moodboard",
+            "References",
+            "Shot Plan"
+          ],
+          "image": "/assets/uploads/screenshot-2026-09-28-162028.png",
+          "note": "Direction first. Effects second."
+        },
+        {
+          "visible": true,
+          "phase": "03 / ASSETS",
+          "title": "Build the Visual Kit",
+          "description": "Organise footage, selects, AI generations, 3D elements, graphics and reusable design systems so the edit stays fast.",
+          "tools": [
+            "Premiere Pro",
+            "AI",
+            "Blender"
+          ],
+          "image": "/assets/uploads/screenshot-2026-09-28-174126.png",
+          "note": "Every asset has a job."
+        },
+        {
+          "visible": true,
+          "phase": "04 / EDIT",
+          "title": "Story, Pace & Cuts",
+          "description": "Shape the narrative in the timeline — hook, build, payoff — then refine timing, captions, framing and transitions.",
+          "tools": [
+            "Premiere Pro",
+            "Captions",
+            "Pacing"
+          ],
+          "image": "/assets/uploads/screenshot-2026-09-28-161922.png",
+          "note": "Cut for attention, not just for time."
+        },
+        {
+          "visible": true,
+          "phase": "05 / MOTION",
+          "title": "Motion, VFX & Composite",
+          "description": "Add the visual treatment: motion graphics, compositing, 3D integration, camera moves and effects that support the story.",
+          "tools": [
+            "After Effects",
+            "Blender",
+            "VFX"
+          ],
+          "image": "/assets/uploads/screenshot-2026-09-28-161936.png",
+          "note": "Make the effect serve the idea."
+        },
+        {
+          "visible": true,
+          "phase": "06 / FINISH",
+          "title": "Sound, Color & Delivery",
+          "description": "Finish the piece with sound design, music balance, color polish, quality control and the correct export for its platform.",
+          "tools": [
+            "SFX",
+            "Color",
+            "QC"
+          ],
+          "image": "/assets/uploads/screenshot-2026-09-28-161951.png",
+          "note": "One last pass before it goes live."
+        }
+      ],
+      "heading": "Behind the edit.",
+      "theme": "dark",
+      "eyebrow": "03 / CASE STUDY",
+      "show_in_nav": true,
+      "process": false,
+      "anchor": "case-study",
+      "nav_label": "Case Study",
+      "presentation": "case-study",
+      "description": "A project is more than the final frame. This is the workflow I use to turn an idea into a polished visual story."
+    },
+    {
+      "items": [
+        {
           "video_url": "https://www-ccv.adobe.io/v1/player/ccv/PerLII6bcdX/embed?api_key=behance1&bgcolor=%23070707",
           "featured": false,
           "visible": true,
