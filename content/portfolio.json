@@ -1145,6 +1145,26 @@
       "anchor": "motion",
       "nav_label": "Motion",
       "description": "Motion graphics, compositing and post-production frames."
+    },
+    {
+      "show_in_nav": true,
+      "process": true,
+      "anchor": "AI Videos",
+      "eyebrow": "Presentation → AI Video Card Deck",
+      "heading": "AI Videos",
+      "theme": "dark-alt",
+      "nav_label": "Presentation → AI Video Card Deck",
+      "items": [
+        {
+          "visible": true,
+          "featured": true,
+          "title": "Gayatri Matra — silver Lining Astrology",
+          "category": "Product Film · AI + Editing + Mantra",
+          "media_type": "embed",
+          "external_url": "",
+          "video_url": "https://www-ccv.adobe.io/v1/player/ccv/GgTFT3rjtU-/embed?api_key=behance1&bgcolor=%23191919"
+        }
+      ]
     }
   ]
 }
