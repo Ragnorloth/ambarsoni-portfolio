@@ -1,0 +1,12 @@
+# Never deploy Git metadata as static assets
+.git/
+.gitignore
+
+# Dependency/cache directories if they are ever added
+node_modules/
+.wrangler/
+
+# Old portfolio source packages kept in the repository for reference
+ambar-creative-portfolio-cms-v2-ready/
+ambar-creative-portfolio-cms-v4-thumbnail-fix/
+ambar-creative-portfolio-v5-special-sections-*/
