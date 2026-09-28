@@ -852,6 +852,27 @@
           "title": "Graphic Design - 057",
           "media_type": "image",
           "image": "/assets/uploads/01.jpg"
+        },
+        {
+          "visible": true,
+          "featured": false,
+          "title": "Graphic Design - 058",
+          "media_type": "image",
+          "image": "/assets/uploads/3.jpeg"
+        },
+        {
+          "visible": true,
+          "featured": false,
+          "title": "Graphic Design - 059",
+          "media_type": "image",
+          "image": "/assets/uploads/gauraiya-post-gausevva.jpg"
+        },
+        {
+          "visible": true,
+          "featured": false,
+          "title": "Graphic Design - 060",
+          "image": "/assets/uploads/culinary-opunjab.png",
+          "media_type": "image"
         }
       ],
       "heading": "Static work, sharp thinking.",
