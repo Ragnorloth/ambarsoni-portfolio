@@ -58,6 +58,13 @@
         {
           "visible": true,
           "featured": false,
+          "title": "Sample Edit | Motion Style",
+          "media_type": "embed",
+          "video_url": "https://monkeyfilmedit.com/wp-content/uploads/2026/09/AI-reel.-2mp4.mp4"
+        },
+        {
+          "visible": true,
+          "featured": false,
           "video_url": "https://www-ccv.adobe.io/v1/player/ccv/--59zPvMxva/embed?api_key=behance1&bgcolor=%23191919",
           "title": "Social Media | Most Powerfull Tool in Business",
           "media_type": "embed"
@@ -117,13 +124,6 @@
           "title": "Deyor | Tour & Travel package",
           "media_type": "embed",
           "video_url": "https://www-ccv.adobe.io/v1/player/ccv/8GssDv3QG3u/embed?api_key=behance1&bgcolor=%23191919"
-        },
-        {
-          "visible": true,
-          "featured": false,
-          "title": "Sample Edit | Motion Style",
-          "media_type": "embed",
-          "video_url": "https://monkeyfilmedit.com/wp-content/uploads/2026/09/AI-reel.-2mp4.mp4"
         }
       ],
       "heading": "People, on screen.",
