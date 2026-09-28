@@ -838,13 +838,27 @@
           "external_url": "",
           "description": "",
           "category": "Graphic Design"
+        },
+        {
+          "visible": true,
+          "featured": false,
+          "title": "Graphic Design - 056",
+          "media_type": "image",
+          "image": "/assets/uploads/culinary-opunjab.png"
+        },
+        {
+          "visible": true,
+          "featured": false,
+          "title": "Graphic Design - 057",
+          "media_type": "image",
+          "image": "/assets/uploads/01.jpg"
         }
       ],
       "heading": "Static work, sharp thinking.",
       "theme": "light",
       "eyebrow": "05 / GRAPHIC DESIGN",
       "show_in_nav": true,
-      "process": false,
+      "process": true,
       "anchor": "graphics",
       "nav_label": "Graphics",
       "presentation": "standard",
