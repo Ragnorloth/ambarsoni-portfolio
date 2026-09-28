@@ -33,6 +33,16 @@ function specialMediaMarkup(item, mode='special'){
   }
 
   if(type === 'embed' && embed){
+    // AI Video deck: render the Adobe CCV player immediately instead of a
+    // click-to-load placeholder. This makes the active AI card visibly load
+    // its actual player on page load. Autoplay is requested, but the browser
+    // / embedded player may still require user interaction for audible media.
+    if(mode === 'ai'){
+      const autoUrl = embed + (embed.includes('?') ? '&' : '?') + 'autoplay=1';
+      return `<div class="special-media special-embed ai-embed-live">
+        <iframe src="${esc(autoUrl)}" title="${title}" loading="eager" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen></iframe>
+      </div>`;
+    }
     if(image){
       return `<div class="special-media managed-embed-card special-embed" data-embed-url="${esc(embed)}" role="button" tabindex="0" aria-label="Play ${title}">
         ${posterMarkup(item,title)}

@@ -74,7 +74,7 @@ body{--mx:50vw;--my:45vh}.pointer-glow{position:fixed;left:-110px;top:-110px;wid
 .three-card:hover{filter:brightness(1.08);z-index:8}
 
 /* Shared special media + scroll reveal */
-.special-media{position:relative;overflow:hidden}.special-media iframe{width:100%;height:100%;min-height:100%;border:0;display:block}.special-embed{cursor:pointer}
+.special-media{position:relative;overflow:hidden}.special-media iframe{width:100%;height:100%;min-height:100%;border:0;display:block}.special-embed{cursor:pointer}.ai-embed-live{cursor:default}.ai-embed-live iframe{width:100%;height:100%;min-height:100%;display:block;border:0;background:#111}
 .special-embed.managed-embed-playing{cursor:default}.special-embed.managed-embed-playing iframe{min-height:100%;height:100%}
 .special-empty{display:grid;place-items:center;color:#666;font:500 .58rem "DM Mono",monospace}
 .special-section .reveal{opacity:0;transform:translateY(55px) scale(.97);transition:opacity .9s ease,transform 1s cubic-bezier(.2,.7,.2,1)}
