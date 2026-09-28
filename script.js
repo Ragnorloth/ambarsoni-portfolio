@@ -136,6 +136,53 @@ function renderSection(section,index){
   return renderStandardSection(section,index,items);
 }
 
+function initTypewriter(){
+  const target=document.querySelector('#heroRole');
+  if(!target || target.dataset.typewriterReady==='true') return;
+  target.dataset.typewriterReady='true';
+  const roles=[
+    'video editor',
+    'graphic designer',
+    'Social Media Optimisatin',
+    'Ai animation',
+    'Magnific',
+    'Chatgpt ai',
+    'Higsfield',
+    'Ai 3D animation',
+    'Seedance 2.0 Expert'
+  ];
+  let roleIndex=0;
+  let charIndex=roles[0].length;
+  let deleting=true;
+  target.textContent=roles[0]+'.';
+
+  const tick=()=>{
+    const role=roles[roleIndex];
+    if(deleting){
+      charIndex=Math.max(0,charIndex-1);
+      target.textContent=role.slice(0,charIndex)+(charIndex?'.':'');
+      if(charIndex===0){
+        deleting=false;
+        roleIndex=(roleIndex+1)%roles.length;
+        setTimeout(tick,180);
+        return;
+      }
+      setTimeout(tick,32);
+      return;
+    }
+    const nextRole=roles[roleIndex];
+    charIndex=Math.min(nextRole.length,charIndex+1);
+    target.textContent=nextRole.slice(0,charIndex)+(charIndex===nextRole.length?'.':'');
+    if(charIndex===nextRole.length){
+      deleting=true;
+      setTimeout(tick,900);
+      return;
+    }
+    setTimeout(tick,52);
+  };
+  setTimeout(tick,900);
+}
+
 function loadContent(){
   return Promise.all([
     fetch('content/site.json',{cache:'no-store'}),
