@@ -270,6 +270,13 @@
           "external_url": "",
           "description": "",
           "category": "Motion Graphics"
+        },
+        {
+          "visible": true,
+          "featured": false,
+          "title": "Strandsoul | Serum",
+          "media_type": "embed",
+          "video_url": "https://www-ccv.adobe.io/v1/player/ccv/GgTFT3rjtU-/embed?api_key=behance1"
         }
       ],
       "heading": "And Much More....",
