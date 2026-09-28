@@ -178,7 +178,15 @@
           ],
           "note": "The edit starts before Premiere Pro.",
           "visual": "script",
-          "script_hook": "What is the one thing the viewer should remember?"
+          "script_hook": "What is the one thing the viewer should remember?",
+          "screens": [
+            "assets/uploads/screenshot-2026-09-28-161152.png",
+            "assets/uploads/screenshot-2026-09-28-161951.png"
+          ],
+          "screen_labels": [
+            "01 / SCRIPTING / PRIMARY",
+            "01 / SCRIPTING / DETAIL"
+          ]
         },
         {
           "visible": true,
@@ -191,7 +199,15 @@
             "AI"
           ],
           "note": "Reference first. Execution second.",
-          "visual": "references"
+          "visual": "references",
+          "screens": [
+            "assets/uploads/screenshot-2026-09-28-161936.png",
+            "assets/uploads/screenshot-2026-09-28-162028.png"
+          ],
+          "screen_labels": [
+            "02 / IDEATION / PRIMARY",
+            "02 / IDEATION / DETAIL"
+          ]
         },
         {
           "visible": true,
@@ -204,7 +220,15 @@
             "Art direction"
           ],
           "note": "Every frame needs a reason to exist.",
-          "visual": "paper"
+          "visual": "paper",
+          "screens": [
+            "assets/uploads/screenshot-2026-09-28-162054.png",
+            "assets/uploads/screenshot-2026-09-28-162127.png"
+          ],
+          "screen_labels": [
+            "03 / VISUAL DEVELOPMENT / PRIMARY",
+            "03 / VISUAL DEVELOPMENT / DETAIL"
+          ]
         },
         {
           "visible": true,
@@ -218,7 +242,15 @@
             "Animation"
           ],
           "note": "Make the world believable, then make it move.",
-          "visual": "blender"
+          "visual": "blender",
+          "screens": [
+            "assets/uploads/screenshot-2026-09-28-174126.png",
+            "assets/uploads/screenshot-2026-09-28-162144.png"
+          ],
+          "screen_labels": [
+            "04 / 3D + ANIMATION / PRIMARY",
+            "04 / 3D + ANIMATION / DETAIL"
+          ]
         },
         {
           "visible": true,
@@ -231,7 +263,15 @@
             "VFX"
           ],
           "note": "Polish the idea without hiding it.",
-          "visual": "ae"
+          "visual": "ae",
+          "screens": [
+            "assets/uploads/screenshot-2026-09-28-162216.png",
+            "assets/uploads/screenshot-2026-09-28-173957.png"
+          ],
+          "screen_labels": [
+            "05 / AFTER EFFECTS / PRIMARY",
+            "05 / AFTER EFFECTS / DETAIL"
+          ]
         },
         {
           "visible": true,
@@ -245,7 +285,15 @@
             "Color"
           ],
           "note": "Timing is storytelling.",
-          "visual": "edit"
+          "visual": "edit",
+          "screens": [
+            "assets/uploads/screenshot-2026-09-28-173957.png",
+            "assets/uploads/screenshot-2026-09-28-174223.png"
+          ],
+          "screen_labels": [
+            "06 / EDITING + SOUND / PRIMARY",
+            "06 / EDITING + SOUND / DETAIL"
+          ]
         },
         {
           "visible": true,
@@ -258,7 +306,15 @@
             "QC"
           ],
           "note": "Accessibility should still feel designed.",
-          "visual": "captions"
+          "visual": "captions",
+          "screens": [
+            "assets/uploads/screenshot-2026-09-28-161936.png",
+            "assets/uploads/screenshot-2026-09-28-162216.png"
+          ],
+          "screen_labels": [
+            "07 / CAPTIONS / PRIMARY",
+            "07 / CAPTIONS / DETAIL"
+          ]
         },
         {
           "visible": true,
@@ -271,7 +327,15 @@
             "Delivery"
           ],
           "note": "Then it is ready for the world.",
-          "visual": "paper"
+          "visual": "paper",
+          "screens": [
+            "assets/uploads/screenshot-2026-09-28-161152.png",
+            "assets/uploads/screenshot-2026-09-28-174223.png"
+          ],
+          "screen_labels": [
+            "08 / DELIVERY / PRIMARY",
+            "08 / DELIVERY / DETAIL"
+          ]
         }
       ],
       "heading": "From idea to final frame.",
