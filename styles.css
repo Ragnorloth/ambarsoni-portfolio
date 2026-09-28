@@ -300,3 +300,57 @@ body.modal-open{overflow:hidden}
   .three-deck-nav b{display:none}
   .three-deck-count{font-size:.52rem}
 }
+
+/* Case Study / Workflow */
+.case-study-section{background:#0b0b0b;border-top:1px solid var(--line);overflow:hidden}
+.case-study-head{display:grid;grid-template-columns:1.2fr .8fr;gap:7vw;align-items:end;margin-bottom:55px}
+.case-study-head h2{font-size:clamp(4rem,8vw,8.5rem);line-height:.8;letter-spacing:-.08em;margin:17px 0 0}
+.case-intro{max-width:430px;padding-bottom:6px}
+.case-file{font:500 .58rem "DM Mono",monospace;color:var(--accent);letter-spacing:.13em}
+.case-intro p{color:#999;line-height:1.7;margin:18px 0 0;font-size:.9rem}
+.case-board{position:relative;min-height:950px;background:
+  radial-gradient(circle at 18% 18%,#fff1 0 1px,transparent 2px),
+  linear-gradient(135deg,#171717,#101010 45%,#151515);
+  background-size:34px 34px,100% 100%;
+  border:1px solid #292929;padding:70px 5vw 85px;box-shadow:0 35px 100px #0008;isolation:isolate}
+.case-board:before{content:"";position:absolute;inset:18px;border:1px solid #ffffff0b;pointer-events:none}
+.case-board-label{position:absolute;top:27px;left:32px;color:#777;font:500 .58rem "DM Mono",monospace;letter-spacing:.12em}
+.case-board-label b{color:var(--accent);margin:0 8px}
+.case-steps{position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:42px 5vw;max-width:1050px;margin:30px auto 0}
+.case-pin{position:relative;transform:rotate(var(--case-tilt));filter:drop-shadow(0 18px 18px #0008);transition:transform .35s ease,filter .35s ease}
+.case-pin:hover{transform:rotate(0deg) translateY(-8px);filter:drop-shadow(0 25px 25px #000a);z-index:5}
+.case-paper{background:#e9e5d8;color:#161616;padding:12px 12px 17px;min-height:330px;position:relative}
+.case-paper:after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 70%,#00000009);pointer-events:none}
+.case-paper-top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #16161626;padding:4px 3px 9px;margin-bottom:10px;font:500 .56rem "DM Mono",monospace}
+.case-paper-top span{color:#8a1111}.case-paper-top b{font-weight:500;color:#555}
+.case-image-wrap{aspect-ratio:16/10;overflow:hidden;background:#ccc;margin-bottom:13px;position:relative}
+.case-image-wrap:before{content:"";position:absolute;inset:0;background:#0001;z-index:1;pointer-events:none}
+.case-image-wrap img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.82) contrast(1.03);transition:transform .6s ease}
+.case-pin:hover .case-image-wrap img{transform:scale(1.035)}
+.case-copy h3{font-size:1.15rem;line-height:1;letter-spacing:-.04em;margin:0 0 9px;font-weight:800}
+.case-copy p{font-size:.72rem;line-height:1.5;color:#4d4a44;margin:0 0 12px}
+.case-tools{display:flex;gap:5px;flex-wrap:wrap}.case-tools span{border:1px solid #16161633;padding:5px 6px;font:500 .48rem "DM Mono",monospace;text-transform:uppercase}
+.case-copy small{display:block;margin-top:12px;padding-top:9px;border-top:1px dashed #16161633;color:#777;font:500 .5rem "DM Mono",monospace;line-height:1.45}
+.case-pin-dot{position:absolute;top:-9px;left:50%;width:17px;height:17px;border-radius:50%;background:#a91d1d;box-shadow:0 3px 7px #0008;z-index:6;transform:translateX(-50%)}
+.case-thread{position:absolute;z-index:1;left:13%;right:13%;top:46%;height:280px;border-top:3px solid #a51c1c;border-radius:50%;transform:rotate(-7deg);opacity:.9;pointer-events:none;box-shadow:0 0 2px #000}
+.case-thread:before,.case-thread:after{content:"";position:absolute;width:65%;height:180px;border-top:3px solid #a51c1c;border-radius:50%;top:75px}
+.case-thread:before{left:-2%;transform:rotate(20deg)}.case-thread:after{right:-2%;transform:rotate(-22deg)}
+.case-stamp{position:absolute;right:35px;bottom:35px;width:130px;height:130px;border:3px double #777;color:#777;border-radius:50%;display:grid;place-items:center;text-align:center;transform:rotate(-12deg);font:700 .55rem "DM Mono",monospace;letter-spacing:.12em;opacity:.55}
+.case-board-note{position:absolute;left:35px;bottom:35px;max-width:300px;color:#777;font:500 .56rem "DM Mono",monospace;line-height:1.6}
+.case-board-note em{color:#aaa;font-family:Georgia,serif;font-size:.85rem}
+.case-study-foot{margin-top:22px}
+@media(max-width:900px){
+  .case-study-head{grid-template-columns:1fr;gap:25px}
+  .case-board{min-height:auto;padding:60px 25px 130px}
+  .case-steps{grid-template-columns:repeat(2,minmax(0,1fr));gap:35px 24px}
+  .case-thread{display:none}
+}
+@media(max-width:600px){
+  .case-study-head h2{font-size:20vw}
+  .case-steps{grid-template-columns:1fr;max-width:430px}
+  .case-paper{min-height:0}
+  .case-board{padding-inline:18px}
+  .case-board-label{left:20px}
+  .case-stamp{width:90px;height:90px;font-size:.42rem;right:20px;bottom:22px}
+  .case-board-note{left:20px;bottom:22px;max-width:210px}
+}
