@@ -59,6 +59,16 @@ collections:
               - {label: "Show in navigation", name: "show_in_nav", widget: "boolean", default: true}
               - {label: "Navigation label", name: "nav_label", widget: "string", required: false}
               - {label: "Show 3D process line", name: "process", widget: "boolean", default: false, required: false}
+              - label: "Visual Presentation"
+                name: "presentation"
+                widget: "select"
+                default: "standard"
+                hint: "Controls the special layout for this section. AI Deck = rotating cards, Talking Head = floating hover-expand videos, 3D Showcase = layered 3D card gallery."
+                options:
+                  - {label: "Standard Grid", value: "standard"}
+                  - {label: "AI Video Card Deck", value: "ai-deck"}
+                  - {label: "Talking Head — Floating", value: "talking-head"}
+                  - {label: "3D / Blender — Layered Showcase", value: "3d-showcase"}
               - label: "Projects / Media"
                 name: "items"
                 widget: "list"
