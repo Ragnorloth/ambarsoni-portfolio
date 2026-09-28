@@ -152,7 +152,7 @@
           "media_type": "embed",
           "title": "Trichologist | India Is a Humid Country ",
           "video": "",
-          "image": "/assets/uploads/screenshot-2026-09-28-161152.png",
+          "image": "",
           "external_url": "",
           "description": "",
           "category": "Reel Short Form"
@@ -163,7 +163,8 @@
           "external_url": "",
           "video_url": "https://media.canva.com/v2/files/uri:ifs%3A%2F%2FV%2FS0JZykO5oYfhdE8MTEL8GPxNeOMrd83H-2JvJB_jvjk.mp4?csig=AAAAAAAAAAAAAAAAAAAAAGYSsHb2twX4h4IXJmrBUD9Lvjd08fj3lA_pgJNKBP2h&exp=1790598360&signer=video-rpc&token=AAIAAVYAL1MwSlp5a081b1lmaGRFOE1URUw4R1B4TmVPTXJkODNILTJKdkpCX2p2amsubXA0AAAAAAGg5_qrwKGTkaV-qbYCMvRWV3ay0iSf7cjoUSdWIKLQbKTtVOQG",
           "media_type": "embed",
-          "title": "Explainer Content | Motion Graphics"
+          "title": "Explainer Content | Motion Graphics",
+          "image": "/assets/uploads/screenshot-2026-09-28-161152.png"
         },
         {
           "video_url": "https://www-ccv.adobe.io/v1/player/ccv/BaCXL6RfrEJ/embed?api_key=behance1&bgcolor=%23070707",
@@ -172,7 +173,7 @@
           "media_type": "embed",
           "title": "After Effects × Blender — Product Animation",
           "video": "",
-          "image": "",
+          "image": "/assets/uploads/screenshot-2026-09-28-162028.png",
           "external_url": "",
           "description": "",
           "category": "3D · Motion"
@@ -196,7 +197,7 @@
           "media_type": "embed",
           "title": "Himsrot — Visual Showcase",
           "video": "",
-          "image": "",
+          "image": "/assets/uploads/screenshot-2026-09-28-162216.png",
           "external_url": "",
           "description": "",
           "category": "Brand Visual"
@@ -220,7 +221,7 @@
           "media_type": "embed",
           "title": "Edrio — Fashion Visual",
           "video": "",
-          "image": "",
+          "image": "/assets/uploads/screenshot-2026-09-28-161951.png",
           "external_url": "",
           "description": "",
           "category": "Fashion · Editing"
@@ -232,7 +233,7 @@
           "media_type": "embed",
           "title": "Nike — 3D Product Animation",
           "video": "",
-          "image": "",
+          "image": "/assets/uploads/screenshot-2026-09-28-161936.png",
           "external_url": "",
           "description": "",
           "category": "3D Product"
@@ -244,7 +245,7 @@
           "media_type": "embed",
           "title": "Edrio Fashion 3D",
           "video": "",
-          "image": "",
+          "image": "/assets/uploads/screenshot-2026-09-28-161951.png",
           "external_url": "",
           "description": "",
           "category": "Motion Graphics"
