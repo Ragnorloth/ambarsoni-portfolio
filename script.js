@@ -169,48 +169,31 @@ function renderCaseVisual(item,i){
 }
 
 function renderCaseStudy(section,index,items){
-  const steps=items.slice(0,8).map((item,i)=>`<article class="case-scene reveal" data-case-step="${i+1}">
-    <div class="case-step-marker"><span>0${i+1}</span><i></i></div>
-    <div class="case-scene-inner">
-      <div class="case-scene-copy">
-        <span class="case-scene-phase">${esc(item.phase||'WORKFLOW')}</span>
-        <h3>${esc(item.title||'Untitled')}</h3>
-        <p>${esc(item.description||'')}</p>
-        ${item.tools?.length?`<div class="case-tools">${item.tools.map(t=>`<span>${esc(t)}</span>`).join('')}</div>`:''}
-        ${item.note?`<div class="case-hand-note">↳ ${esc(item.note)}</div>`:''}
-      </div>
-      <div class="case-scene-visual">${renderCaseVisual(item,i)}</div>
-    </div>
-  </article>`).join('');
+  const fallbackScreens=[
+    'assets/uploads/screenshot-2026-09-28-161152.png','assets/uploads/screenshot-2026-09-28-161922.png',
+    'assets/uploads/screenshot-2026-09-28-161936.png','assets/uploads/screenshot-2026-09-28-161951.png',
+    'assets/uploads/screenshot-2026-09-28-162028.png','assets/uploads/screenshot-2026-09-28-162054.png',
+    'assets/uploads/screenshot-2026-09-28-162127.png','assets/uploads/screenshot-2026-09-28-162144.png',
+    'assets/uploads/screenshot-2026-09-28-162216.png','assets/uploads/screenshot-2026-09-28-173957.png',
+    'assets/uploads/screenshot-2026-09-28-174126.png','assets/uploads/screenshot-2026-09-28-174223.png'
+  ];
+  const iconFor=(tool='')=>{
+    const t=String(tool).toLowerCase();
+    if(t.includes('premiere')) return 'Pr'; if(t.includes('after')) return 'Ae';
+    if(t.includes('blender')||t.includes('3d')) return 'Bl'; if(t.includes('kalakkar')||t.includes('caption')) return 'K';
+    if(t.includes('ai')) return 'AI'; if(t.includes('photoshop')) return 'Ps';
+    if(t.includes('script')||t.includes('hook')) return '✎'; return '✦';
+  };
+  const screenMarkup=(src,idx,label)=>'<figure class="case-pin-print case-print-'+(idx%3)+'" data-case-print="'+idx+'"><span class="case-print-pin"></span><span class="case-print-tape"></span><img src="'+esc(src)+'" alt="'+esc(label||'Workflow screenshot')+'" loading="lazy"><figcaption>'+esc(label||'PROJECT EVIDENCE')+'</figcaption></figure>';
+  const hotspot=(item,i)=>{
+    const screens=(Array.isArray(item.screens)&&item.screens.length?item.screens:(item.image?[item.image]:[fallbackScreens[i%fallbackScreens.length]])).slice(0,3);
+    const labels=(item.screen_labels||[]).map(String);
+    const tools=(item.tools||[]).slice(0,5);
+    return '<article class="case-hotspot case-hotspot-'+(i+1)+'" data-case-step="'+(i+1)+'"><span class="case-pin-node" aria-hidden="true"><i></i><b>0'+(i+1)+'</b></span><div class="case-paper-note"><div class="case-note-top"><span>'+esc(item.phase||'WORKFLOW')+'</span><b>'+String(i+1).padStart(2,'0')+'</b></div><h3>'+esc(item.title||'Workflow')+'</h3><p>'+esc(item.description||'')+'</p><div class="case-icon-row">'+tools.map(t=>'<span title="'+esc(t)+'"><b>'+iconFor(t)+'</b><em>'+esc(t)+'</em></span>').join('')+'</div>'+(item.note?'<div class="case-chalk-note">↳ '+esc(item.note)+'</div>':'')+'</div><div class="case-evidence">'+screens.map((s,j)=>screenMarkup(s,j,labels[j]||((item.phase||'WORKFLOW')+' / EVIDENCE '+(j+1)))).join('')+'</div></article>';
+  };
+  const steps=items.slice(0,8).map(hotspot).join('');
   const closeImage=section.case_closing_image||'assets/profile-ambar.webp';
-  return `<section id="${esc(section.anchor)}" class="section managed-section case-study-section" data-presentation="case-study">
-    <div class="case-hero reveal">
-      <div class="case-hero-kicker"><span>CASE FILE / 001</span><span>PRIVATE WORKFLOW ARCHIVE</span></div>
-      <div class="case-hero-title"><span class="case-redline"></span><h2>${esc(section.heading||'Behind the edit.')}</h2><p>${esc(section.description||'From the first idea to the final frame — follow the trail.')}</p></div>
-      <div class="case-hero-note">A project is never just a timeline.<br><em>It is a chain of decisions.</em></div>
-      <div class="case-bulb" aria-hidden="true"><span class="case-bulb-wire"></span><span class="case-bulb-cap"></span><span class="case-bulb-glass"><i></i></span></div>
-    </div>
-    <div class="case-story">
-      <div class="case-story-thread" aria-hidden="true"></div>
-      <div class="case-story-label">FOLLOW THE PROCESS <b>↘</b></div>
-      ${steps}
-    </div>
-    <div class="case-close reveal">
-      <div class="case-folder">
-        <span class="case-confidential">CONFIDENTIAL</span>
-        <div class="case-close-strip">CASE FILE CLOSED.<br><small>THANK YOU!</small></div>
-        <div class="case-qr" aria-hidden="true"></div>
-        <p>${esc(section.case_closing_text||'For creativity, collaborations or just a conversation — let’s connect.')}</p>
-      </div>
-      <div class="case-portrait-wrap">
-        <div class="case-leaves case-leaves-a"></div><div class="case-leaves case-leaves-b"></div>
-        <div class="case-portrait-ring"><img src="${esc(closeImage)}" alt="Ambar Soni" loading="lazy"></div>
-        <svg class="case-thanks-ring" viewBox="0 0 220 220" aria-hidden="true"><defs><path id="thanksPath" d="M110,110 m-87,0 a87,87 0 1,1 174,0 a87,87 0 1,1 -174,0"/></defs><text><textPath href="#thanksPath" startOffset="2%">THANK YOU FOR SCROLLING • LOOKING FORWARD TO CONNECT • </textPath></text></svg>
-      </div>
-      <div class="case-close-copy"><span>THE END / FOR NOW</span><h3>${esc(section.case_closing_title||'Looking forward to connect.')}</h3><p>Video editing • Motion • AI • Visual storytelling</p></div>
-    </div>
-    <div class="special-foot case-study-foot"><span>BRIEF / SCRIPT / REFERENCES / BUILD / EDIT / SOUND / DELIVERY</span><span>CASE FILE / CLOSED ↘</span></div>
-  </section>`;
+  return '<section id="'+esc(section.anchor)+'" class="section managed-section case-study-section case-cinema" data-presentation="case-study"><div class="case-cinema-scroll"><div class="case-cinema-sticky"><div class="case-cinema-vignette"></div><div class="case-camera" data-case-camera><div class="case-blackboard" data-case-board><div class="case-chalk-title"><span>CASE STUDY / 001</span><strong>FROM IDEA<br>TO FINAL FRAME</strong><em>scroll to investigate ↘</em></div><div class="case-board-meta"><span>VIDEO / MOTION / AI / 3D</span><span>PRIVATE WORKFLOW ARCHIVE</span></div><svg class="case-thread-map" viewBox="0 0 1200 720" preserveAspectRatio="none" aria-hidden="true"><path d="M120 150 C205 105 300 112 400 142 S620 155 735 120 S960 135 1060 205 S1045 360 915 350 S700 300 610 390 S405 485 245 450 S145 525 305 600 S580 625 785 560 S1015 535 1085 610" /><path class="case-thread-secondary" d="M120 150 C280 220 270 330 245 450 M735 120 C690 220 710 315 610 390 M915 350 C860 430 930 505 1015 535" /></svg><div class="case-chalk-arrow case-arrow-a">↘</div><div class="case-chalk-arrow case-arrow-b">↙</div><div class="case-chalk-arrow case-arrow-c">↗</div><div class="case-software-wall"><span class="case-app app-pr">Pr</span><span class="case-app app-ae">Ae</span><span class="case-app app-bl">Bl</span><span class="case-app app-ai">AI</span><span class="case-app app-k">K</span></div>'+steps+'<div class="case-board-stamp">CREATIVE<br>PROCESS<br>ARCHIVE</div><div class="case-board-scribble">IDEA → STORY → VISUALS → BUILD → EDIT → DELIVERY</div><div class="case-final-zone"><div class="case-folder-mini"><span>CONFIDENTIAL</span><strong>CASE FILE<br>CLOSED.</strong><b>THANK YOU!</b></div><div class="case-final-portrait"><img src="'+esc(closeImage)+'" alt="Ambar Soni" loading="lazy"></div><div class="case-final-copy"><small>THE END / FOR NOW</small><h3>'+esc(section.case_closing_title||'Looking forward to connect.')+'</h3></div></div></div></div><div class="case-camera-readout"><span data-case-camera-label>01 / CASE STUDY</span><b data-case-camera-progress>00%</b></div></div></div></section>';
 }
 
 function renderSection(section,index){
@@ -302,6 +285,27 @@ function loadContent(){
   });
 }
 
+function setupCaseCinema(){
+  const section=document.querySelector('.case-cinema'),board=document.querySelector('[data-case-board]'),camera=document.querySelector('[data-case-camera]');
+  if(!section||!board||!camera||section.dataset.caseReady==='true')return;
+  section.dataset.caseReady='true';
+  const label=section.querySelector('[data-case-camera-label]'),pct=section.querySelector('[data-case-camera-progress]');
+  const poses=[
+    {x:0,y:0,s:1,label:'01 / CASE STUDY'},{x:-13,y:-10,s:1.26,label:'02 / SCRIPT + BRIEF'},
+    {x:12,y:-10,s:1.31,label:'03 / IDEATION + REFERENCES'},{x:-14,y:4,s:1.34,label:'04 / VISUAL DEVELOPMENT'},
+    {x:12,y:6,s:1.42,label:'05 / 3D + ANIMATION'},{x:-12,y:12,s:1.45,label:'06 / AFTER EFFECTS'},
+    {x:13,y:17,s:1.50,label:'07 / EDIT + SOUND'},{x:-9,y:23,s:1.54,label:'08 / CAPTIONS + DELIVERY'},
+    {x:7,y:29,s:1.62,label:'09 / CASE FILE CLOSED'}
+  ];
+  const update=()=>{
+    const rect=section.getBoundingClientRect(),range=Math.max(section.offsetHeight-innerHeight,1),p=Math.max(0,Math.min(1,-rect.top/range)),eased=p*p*(3-2*p);
+    const scaled=eased*(poses.length-1),a=Math.floor(scaled),b=Math.min(a+1,poses.length-1),t=scaled-a,A=poses[a],B=poses[b];
+    camera.style.setProperty('--cam-x',(A.x+(B.x-A.x)*t)+'vw');camera.style.setProperty('--cam-y',(A.y+(B.y-A.y)*t)+'vh');camera.style.setProperty('--cam-s',(A.s+(B.s-A.s)*t).toFixed(3));
+    if(label)label.textContent=t<.5?A.label:B.label;if(pct)pct.textContent=String(Math.round(p*100)).padStart(2,'0')+'%';section.style.setProperty('--case-progress',p.toFixed(3));
+  };
+  let raf=0;const onScroll=()=>{if(raf)return;raf=requestAnimationFrame(()=>{update();raf=0;})};
+  addEventListener('scroll',onScroll,{passive:true});addEventListener('resize',update,{passive:true});update();
+}
 function setupInteractions(){
   document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}}));
   setupPointerGlow();
@@ -312,6 +316,7 @@ function setupInteractions(){
   setupAiDeck();
   setupTalkingHead();
   setupThreeShowcase();
+  setupCaseCinema();
 
   const caseBulb=document.querySelector('.case-bulb');
   if(caseBulb && !caseBulb.dataset.flickerReady){
