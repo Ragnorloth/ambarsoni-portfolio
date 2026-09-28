@@ -240,6 +240,14 @@
           "external_url": "",
           "description": "",
           "category": "Motion Graphics"
+        },
+        {
+          "visible": true,
+          "featured": false,
+          "external_url": "",
+          "video_url": "https://media.canva.com/v2/files/uri:ifs%3A%2F%2FV%2FS0JZykO5oYfhdE8MTEL8GPxNeOMrd83H-2JvJB_jvjk.mp4?csig=AAAAAAAAAAAAAAAAAAAAAGYSsHb2twX4h4IXJmrBUD9Lvjd08fj3lA_pgJNKBP2h&exp=1790598360&signer=video-rpc&token=AAIAAVYAL1MwSlp5a081b1lmaGRFOE1URUw4R1B4TmVPTXJkODNILTJKdkpCX2p2amsubXA0AAAAAAGg5_qrwKGTkaV-qbYCMvRWV3ay0iSf7cjoUSdWIKLQbKTtVOQG",
+          "media_type": "embed",
+          "title": "Explainer Content | Motion Graphics"
         }
       ],
       "heading": "And Much More....",
