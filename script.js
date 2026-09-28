@@ -155,43 +155,61 @@ function render3DShowcase(section,index,items){
 }
 
 
+
+function renderCaseVisual(item,i){
+  if(item.image) return `<div class="case-real-visual"><img src="${esc(item.image)}" alt="${esc(item.title||'Workflow visual')}" loading="lazy"></div>`;
+  const type=item.visual||'paper';
+  if(type==='script') return `<div class="case-visual case-script"><div class="case-file-tag">SCRIPT / CONFIDENTIAL</div><div class="script-page"><span>INT. / CREATIVE ROOM — DAY</span><h4>${esc(item.script_hook||'A rough idea becomes a clear story.')}</h4><div class="script-lines"><i></i><i></i><i></i><i></i><i></i></div><div class="script-checks">☑ HOOK &nbsp;&nbsp; ☑ STORY BEAT &nbsp;&nbsp; ☑ CTA</div></div><div class="case-pencil"></div></div>`;
+  if(type==='references') return `<div class="case-visual case-references"><div class="ref-note">VISUAL DIRECTION</div><div class="ref-grid"><span class="ref-photo ref-a"></span><span class="ref-photo ref-b"></span><span class="ref-photo ref-c"></span><span class="ref-photo ref-d"></span></div><div class="ref-tags"><b>CHARACTER</b><b>LIGHTING</b><b>CAMERA</b><b>STYLE</b></div></div>`;
+  if(type==='ae') return `<div class="case-visual case-software ae-screen"><div class="screen-bar"><b>Adobe After Effects</b><span>● ● ●</span></div><div class="ae-canvas"><div class="ae-orb"></div><div class="ae-type">MOTION<br>DESIGN</div><div class="ae-guide"></div></div><div class="ae-timeline"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>`;
+  if(type==='blender') return `<div class="case-visual case-software blender-screen"><div class="screen-bar"><b>BLENDER / 3D SCENE</b><span>CAMERA 01</span></div><div class="blend-canvas"><div class="blend-road"></div><div class="blend-building b1"></div><div class="blend-building b2"></div><div class="blend-tree"></div><div class="blend-camera"></div></div><div class="blend-ui"><span>SCENE</span><span>LIGHT</span><span>CAMERA</span><span>ANIMATION</span></div></div>`;
+  if(type==='captions') return `<div class="case-visual case-software captions-screen"><div class="screen-bar"><b>Kalakkar.io / Captions</b><span>GENERATING</span></div><div class="caption-video"><div class="caption-demo">the spaces <em>🏠</em><br><strong>where we live, work, and breathe.</strong></div></div><div class="caption-list"><span>Dust, pollution,</span><span>everyday</span><span>particles moving</span><span>silently through</span><span>the spaces where</span></div></div>`;
+  if(type==='edit') return `<div class="case-visual case-software edit-screen"><div class="screen-bar"><b>PREMIERE PRO / FINAL EDIT</b><span>01:03:06</span></div><div class="edit-preview"><div class="edit-play">▶</div></div><div class="edit-timeline"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>`;
+  return `<div class="case-visual case-paper-visual"><div class="paper-tape"></div><div class="paper-scribble">SELECT<br>REFINE<br>REPEAT</div><div class="paper-arrow">↗</div></div>`;
+}
+
 function renderCaseStudy(section,index,items){
-  const steps=items.slice(0,8).map((item,i)=>{
-    const tilt=[-2.2,1.6,-1.3,2.4,-1.8,1.2, -1.4, 2][i] || 0;
-    const note=item.note||'';
-    return `<article class="case-pin case-pin-${i+1} reveal" style="--case-tilt:${tilt}deg">
-      <span class="case-pin-dot" aria-hidden="true"></span>
-      <div class="case-paper">
-        <div class="case-paper-top"><span>${String(i+1).padStart(2,'0')}</span><b>${esc(item.phase||'WORKFLOW')}</b></div>
-        ${item.image?`<div class="case-image-wrap"><img src="${esc(item.image)}" alt="${esc(item.title||'Workflow step')}" loading="lazy"></div>`:''}
-        <div class="case-copy">
-          <h3>${esc(item.title||'Untitled')}</h3>
-          <p>${esc(item.description||'')}</p>
-          ${item.tools?`<div class="case-tools">${item.tools.map(t=>`<span>${esc(t)}</span>`).join('')}</div>`:''}
-          ${note?`<small>${esc(note)}</small>`:''}
-        </div>
+  const steps=items.slice(0,8).map((item,i)=>`<article class="case-scene reveal" data-case-step="${i+1}">
+    <div class="case-step-marker"><span>0${i+1}</span><i></i></div>
+    <div class="case-scene-inner">
+      <div class="case-scene-copy">
+        <span class="case-scene-phase">${esc(item.phase||'WORKFLOW')}</span>
+        <h3>${esc(item.title||'Untitled')}</h3>
+        <p>${esc(item.description||'')}</p>
+        ${item.tools?.length?`<div class="case-tools">${item.tools.map(t=>`<span>${esc(t)}</span>`).join('')}</div>`:''}
+        ${item.note?`<div class="case-hand-note">↳ ${esc(item.note)}</div>`:''}
       </div>
-    </article>`;
-  }).join('');
+      <div class="case-scene-visual">${renderCaseVisual(item,i)}</div>
+    </div>
+  </article>`).join('');
+  const closeImage=section.case_closing_image||'assets/profile-ambar.webp';
   return `<section id="${esc(section.anchor)}" class="section managed-section case-study-section" data-presentation="case-study">
-    <div class="case-study-head">
-      <div>
-        <span class="eyebrow">${esc(section.eyebrow||'03 / CASE STUDY')}</span>
-        <h2>${esc(section.heading||'Behind the edit.')}</h2>
-      </div>
-      <div class="case-intro">
-        <span class="case-file">CASE FILE / 001</span>
-        <p>${esc(section.description||'From brief to final frame — a look at the decisions, tools and craft behind the work.')}</p>
-      </div>
+    <div class="case-hero reveal">
+      <div class="case-hero-kicker"><span>CASE FILE / 001</span><span>PRIVATE WORKFLOW ARCHIVE</span></div>
+      <div class="case-hero-title"><span class="case-redline"></span><h2>${esc(section.heading||'Behind the edit.')}</h2><p>${esc(section.description||'From the first idea to the final frame — follow the trail.')}</p></div>
+      <div class="case-hero-note">A project is never just a timeline.<br><em>It is a chain of decisions.</em></div>
+      <div class="case-bulb" aria-hidden="true"><span class="case-bulb-wire"></span><span class="case-bulb-cap"></span><span class="case-bulb-glass"><i></i></span></div>
     </div>
-    <div class="case-board">
-      <div class="case-bulb" aria-hidden="true"><span class="case-bulb-wire"></span><span class="case-bulb-cap"></span><span class="case-bulb-glass"><i></i></span></div>\n      <div class="case-board-label">MY WORKFLOW <b>→</b> IDEA / BUILD / POLISH</div>
-      <div class="case-thread" aria-hidden="true"></div>
-      <div class="case-steps">${steps}</div>
-      <div class="case-stamp">PROCESS<br>DOCUMENTED</div>
-      <div class="case-board-note">The final video is only the visible part.<br><em>The process is where the story takes shape.</em></div>
+    <div class="case-story">
+      <div class="case-story-thread" aria-hidden="true"></div>
+      <div class="case-story-label">FOLLOW THE PROCESS <b>↘</b></div>
+      ${steps}
     </div>
-    <div class="special-foot case-study-foot"><span>BRIEF / RESEARCH / EDIT / MOTION / SOUND / DELIVERY</span><span>SCROLL TO FOLLOW THE PROCESS ↘</span></div>
+    <div class="case-close reveal">
+      <div class="case-folder">
+        <span class="case-confidential">CONFIDENTIAL</span>
+        <div class="case-close-strip">CASE FILE CLOSED.<br><small>THANK YOU!</small></div>
+        <div class="case-qr" aria-hidden="true"></div>
+        <p>${esc(section.case_closing_text||'For creativity, collaborations or just a conversation — let’s connect.')}</p>
+      </div>
+      <div class="case-portrait-wrap">
+        <div class="case-leaves case-leaves-a"></div><div class="case-leaves case-leaves-b"></div>
+        <div class="case-portrait-ring"><img src="${esc(closeImage)}" alt="Ambar Soni" loading="lazy"></div>
+        <svg class="case-thanks-ring" viewBox="0 0 220 220" aria-hidden="true"><defs><path id="thanksPath" d="M110,110 m-87,0 a87,87 0 1,1 174,0 a87,87 0 1,1 -174,0"/></defs><text><textPath href="#thanksPath" startOffset="2%">THANK YOU FOR SCROLLING • LOOKING FORWARD TO CONNECT • </textPath></text></svg>
+      </div>
+      <div class="case-close-copy"><span>THE END / FOR NOW</span><h3>${esc(section.case_closing_title||'Looking forward to connect.')}</h3><p>Video editing • Motion • AI • Visual storytelling</p></div>
+    </div>
+    <div class="special-foot case-study-foot"><span>BRIEF / SCRIPT / REFERENCES / BUILD / EDIT / SOUND / DELIVERY</span><span>CASE FILE / CLOSED ↘</span></div>
   </section>`;
 }
 
