@@ -904,6 +904,129 @@
     {
       "items": [
         {
+          "visible": true,
+          "phase": "01 / SCRIPTING",
+          "title": "Start with the story.",
+          "description": "Turn a loose idea into a clear hook, narrative, shot direction and message before the timeline gets involved.",
+          "tools": [
+            "Script",
+            "Hook",
+            "Story beats"
+          ],
+          "note": "The edit starts before Premiere Pro.",
+          "visual": "script",
+          "script_hook": "What is the one thing the viewer should remember?"
+        },
+        {
+          "visible": true,
+          "phase": "02 / IDEATION",
+          "title": "Build the visual world.",
+          "description": "Explore references for characters, environments, lighting, framing, colour and the visual language of the piece.",
+          "tools": [
+            "Moodboard",
+            "References",
+            "AI"
+          ],
+          "note": "Reference first. Execution second.",
+          "visual": "references"
+        },
+        {
+          "visible": true,
+          "phase": "03 / VISUAL DEVELOPMENT",
+          "title": "Develop the look.",
+          "description": "Create or refine the visual assets that will carry the story — from AI-generated imagery and character concepts to custom graphic directions.",
+          "tools": [
+            "AI visuals",
+            "Design",
+            "Art direction"
+          ],
+          "note": "Every frame needs a reason to exist.",
+          "visual": "paper"
+        },
+        {
+          "visible": true,
+          "phase": "04 / 3D + ANIMATION",
+          "title": "Build the moving parts.",
+          "description": "Set up 3D environments, cameras, lighting and animation when the story needs depth that a flat frame cannot provide.",
+          "tools": [
+            "Blender",
+            "3D",
+            "Camera",
+            "Animation"
+          ],
+          "note": "Make the world believable, then make it move.",
+          "visual": "blender"
+        },
+        {
+          "visible": true,
+          "phase": "05 / AFTER EFFECTS",
+          "title": "Bring everything together.",
+          "description": "Composite assets, animate typography, add VFX, transitions and motion systems, then refine the visual rhythm.",
+          "tools": [
+            "After Effects",
+            "Motion",
+            "VFX"
+          ],
+          "note": "Polish the idea without hiding it.",
+          "visual": "ae"
+        },
+        {
+          "visible": true,
+          "phase": "06 / EDITING + SOUND",
+          "title": "Shape the final story.",
+          "description": "Build the cut in Premiere Pro, tighten pacing, design sound, balance music and voice, then review every beat.",
+          "tools": [
+            "Premiere Pro",
+            "Sound",
+            "SFX",
+            "Color"
+          ],
+          "note": "Timing is storytelling.",
+          "visual": "edit"
+        },
+        {
+          "visible": true,
+          "phase": "07 / CAPTIONS",
+          "title": "Make every word land.",
+          "description": "Generate, clean and style captions with Kalakkar.io, then bring them back into the edit for final timing and readability.",
+          "tools": [
+            "Kalakkar.io",
+            "Captions",
+            "QC"
+          ],
+          "note": "Accessibility should still feel designed.",
+          "visual": "captions"
+        },
+        {
+          "visible": true,
+          "phase": "08 / DELIVERY",
+          "title": "Final review. Final frame.",
+          "description": "Check the complete piece for picture, sound, captions, branding and export settings before it leaves the project.",
+          "tools": [
+            "Review",
+            "Export",
+            "Delivery"
+          ],
+          "note": "Then it is ready for the world.",
+          "visual": "paper"
+        }
+      ],
+      "heading": "From idea to final frame.",
+      "theme": "dark",
+      "eyebrow": "03 / CASE STUDY",
+      "show_in_nav": true,
+      "process": false,
+      "anchor": "case-study",
+      "nav_label": "Case Study",
+      "presentation": "case-study",
+      "description": "A behind-the-scenes trail through scripting, ideation, visual development, 3D, motion, editing, captions and delivery.",
+      "case_closing_title": "Looking forward to connect.",
+      "case_closing_text": "For creativity, collaborations or just a conversation — let’s connect.",
+      "case_closing_image": "assets/profile-ambar.webp"
+    },
+    {
+      "items": [
+        {
           "video_url": "",
           "featured": false,
           "visible": true,
