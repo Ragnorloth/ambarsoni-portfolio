@@ -290,21 +290,44 @@ function setupCaseCinema(){
   if(!section||!board||!camera||section.dataset.caseReady==='true')return;
   section.dataset.caseReady='true';
   const label=section.querySelector('[data-case-camera-label]'),pct=section.querySelector('[data-case-camera-progress]');
+  const hotspots=[...board.querySelectorAll('.case-hotspot')];
   const poses=[
-    {x:0,y:0,s:1,label:'01 / CASE STUDY'},{x:-13,y:-10,s:1.26,label:'02 / SCRIPT + BRIEF'},
-    {x:12,y:-10,s:1.31,label:'03 / IDEATION + REFERENCES'},{x:-14,y:4,s:1.34,label:'04 / VISUAL DEVELOPMENT'},
-    {x:12,y:6,s:1.42,label:'05 / 3D + ANIMATION'},{x:-12,y:12,s:1.45,label:'06 / AFTER EFFECTS'},
-    {x:13,y:17,s:1.50,label:'07 / EDIT + SOUND'},{x:-9,y:23,s:1.54,label:'08 / CAPTIONS + DELIVERY'},
-    {x:7,y:29,s:1.62,label:'09 / CASE FILE CLOSED'}
+    {x:0,y:0,s:.94,label:'01 / CASE STUDY'},
+    {x:-4,y:-2,s:1.02,label:'02 / SCRIPT + BRIEF'},
+    {x:7,y:-2,s:1.05,label:'03 / IDEATION + REFERENCES'},
+    {x:-6,y:4,s:1.08,label:'04 / VISUAL DEVELOPMENT'},
+    {x:7,y:5,s:1.11,label:'05 / 3D + ANIMATION'},
+    {x:-6,y:9,s:1.14,label:'06 / AFTER EFFECTS'},
+    {x:7,y:12,s:1.17,label:'07 / EDIT + SOUND'},
+    {x:-4,y:16,s:1.20,label:'08 / CAPTIONS + DELIVERY'},
+    {x:2,y:20,s:1.24,label:'09 / CASE FILE CLOSED'}
   ];
+  const clamp=(n,a=0,b=1)=>Math.max(a,Math.min(b,n));
+  const ease=n=>n*n*(3-2*n);
   const update=()=>{
-    const rect=section.getBoundingClientRect(),range=Math.max(section.offsetHeight-innerHeight,1),p=Math.max(0,Math.min(1,-rect.top/range)),eased=p*p*(3-2*p);
-    const scaled=eased*(poses.length-1),a=Math.floor(scaled),b=Math.min(a+1,poses.length-1),t=scaled-a,A=poses[a],B=poses[b];
-    camera.style.setProperty('--cam-x',(A.x+(B.x-A.x)*t)+'vw');camera.style.setProperty('--cam-y',(A.y+(B.y-A.y)*t)+'vh');camera.style.setProperty('--cam-s',(A.s+(B.s-A.s)*t).toFixed(3));
-    if(label)label.textContent=t<.5?A.label:B.label;if(pct)pct.textContent=String(Math.round(p*100)).padStart(2,'0')+'%';section.style.setProperty('--case-progress',p.toFixed(3));
+    const rect=section.getBoundingClientRect(),range=Math.max(section.offsetHeight-innerHeight,1);
+    const p=clamp(-rect.top/range),write=clamp(p/.16);
+    section.style.setProperty('--case-progress',p.toFixed(3));
+    section.style.setProperty('--case-write',write.toFixed(3));
+    const scaled=ease(p)*(poses.length-1),a=Math.floor(scaled),b=Math.min(a+1,poses.length-1),t=scaled-a,A=poses[a],B=poses[b];
+    camera.style.setProperty('--cam-x',(A.x+(B.x-A.x)*t)+'vw');
+    camera.style.setProperty('--cam-y',(A.y+(B.y-A.y)*t)+'vh');
+    camera.style.setProperty('--cam-s',(A.s+(B.s-A.s)*t).toFixed(3));
+    hotspots.forEach((el,i)=>{
+      const threshold=.17+i*.085;
+      el.classList.toggle('case-revealed',p>threshold);
+      el.style.setProperty('--case-local',clamp((p-threshold)/.13).toFixed(3));
+    });
+    const final=board.querySelector('.case-final-zone');
+    if(final) final.classList.toggle('case-revealed',p>.82);
+    if(label)label.textContent=t<.5?A.label:B.label;
+    if(pct)pct.textContent=String(Math.round(p*100)).padStart(2,'0')+'%';
   };
-  let raf=0;const onScroll=()=>{if(raf)return;raf=requestAnimationFrame(()=>{update();raf=0;})};
-  addEventListener('scroll',onScroll,{passive:true});addEventListener('resize',update,{passive:true});update();
+  let raf=0;
+  const onScroll=()=>{if(raf)return;raf=requestAnimationFrame(()=>{update();raf=0;})};
+  addEventListener('scroll',onScroll,{passive:true});
+  addEventListener('resize',update,{passive:true});
+  update();
 }
 function setupInteractions(){
   document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}}));
