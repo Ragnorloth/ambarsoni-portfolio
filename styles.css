@@ -508,3 +508,31 @@ body.modal-open{overflow:hidden}
     min-height:1700px!important;
   }
 }
+
+/* ===== CASE CINEMA V4 / CONTENT MAP ===== */
+.case-blackboard{
+  width:240vw!important;
+  height:200vh!important;
+  min-width:1900px!important;
+  min-height:1200px!important;
+}
+.case-chalk-title{top:25%!important;left:7%!important}
+.case-board-meta{top:5%!important}
+.case-software-wall{top:10%!important}
+.case-hotspot-1{left:5%!important;top:42%!important}
+.case-hotspot-2{left:52%!important;top:40%!important}
+.case-hotspot-3{left:6%!important;top:57%!important}
+.case-hotspot-4{left:51%!important;top:55%!important}
+.case-hotspot-5{left:5%!important;top:70%!important}
+.case-hotspot-6{left:51%!important;top:68%!important}
+.case-hotspot-7{left:15%!important;top:83%!important}
+.case-hotspot-8{left:58%!important;top:81%!important}
+.case-final-zone{left:24%!important;right:8%!important;bottom:1%!important;height:19%!important}
+.case-board-stamp{right:3%!important;bottom:6%!important}
+.case-board-scribble{left:5%!important;bottom:5%!important}
+@media(max-width:900px){
+  .case-blackboard{width:300vw!important;height:220vh!important;min-width:1800px!important;min-height:1250px!important}
+}
+@media(max-width:650px){
+  .case-blackboard{width:400vw!important;height:250vh!important;min-width:1700px!important;min-height:1350px!important}
+}
