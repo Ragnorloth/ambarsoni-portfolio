@@ -412,3 +412,11 @@ body.modal-open{overflow:hidden}
 @media(max-width:900px){.case-cinema-scroll{height:1000vh}.case-blackboard{width:210vw;height:140vh;min-width:1200px}.case-hotspot{min-width:360px;width:38%}.case-chalk-title strong{font-size:66px}.case-software-wall{display:none}.case-final-zone{left:16%;gap:25px}.case-final-copy h3{font-size:34px}}
 @media(max-width:650px){.case-cinema-scroll{height:1100vh}.case-blackboard{width:300vw;height:160vh;min-width:1100px;border-width:12px}.case-chalk-title{left:7%;top:7%}.case-chalk-title strong{font-size:58px}.case-hotspot{min-width:300px;width:43%}.case-paper-note{padding:20px;min-height:210px}.case-paper-note h3{font-size:29px}.case-evidence{height:190px}.case-pin-print img{height:102px}.case-final-zone{left:12%;right:3%;bottom:1%;height:25%}.case-folder-mini{width:230px;height:145px;padding:18px}.case-folder-mini strong{font-size:19px}.case-final-portrait{width:130px;height:130px}.case-final-copy h3{font-size:28px}.case-camera-readout{left:18px;bottom:18px}}
 @media(prefers-reduced-motion:reduce){.case-camera{transform:none!important}.case-cinema-scroll{height:100vh}.case-cinema-sticky{position:relative}}
+
+/* Connected evidence pins */
+.case-pin-node{position:absolute;left:50%;top:-28px;width:30px;height:30px;transform:translateX(-50%);z-index:10;display:grid;place-items:center}
+.case-pin-node i{width:17px;height:17px;border-radius:50%;background:#b51e1e;border:2px solid #671010;box-shadow:0 3px 8px #000b,0 0 12px #b51e1e55;display:block}
+.case-pin-node i:after{content:"";position:absolute;width:5px;height:5px;border-radius:50%;background:#ffad9d;left:50%;top:5px;transform:translateX(-50%)}
+.case-pin-node b{position:absolute;left:24px;top:1px;color:#c8c1b3;font:700 9px "DM Mono",monospace;background:#161713cc;padding:4px 5px;border:1px solid #ffffff18}
+.case-hotspot-1 .case-pin-node,.case-hotspot-3 .case-pin-node,.case-hotspot-5 .case-pin-node,.case-hotspot-7 .case-pin-node{transform:translateX(-50%) rotate(-2deg)}
+.case-hotspot-2 .case-pin-node,.case-hotspot-4 .case-pin-node,.case-hotspot-6 .case-pin-node,.case-hotspot-8 .case-pin-node{transform:translateX(-50%) rotate(2deg)}
