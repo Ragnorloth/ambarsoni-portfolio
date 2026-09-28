@@ -536,3 +536,62 @@ body.modal-open{overflow:hidden}
 @media(max-width:650px){
   .case-blackboard{width:400vw!important;height:250vh!important;min-width:1700px!important;min-height:1350px!important}
 }
+
+/* ===== CASE CINEMA V5 / REFERENCE-BOARD COMPOSITION ===== */
+.case-cinema-scroll{height:900vh!important;background:#121310!important}
+.case-cinema-sticky{
+  background:#171814!important;
+  overflow:hidden!important;
+}
+.case-camera{
+  position:absolute!important;
+  inset:0!important;
+  width:100vw!important;
+  height:100vh!important;
+  overflow:hidden!important;
+  transform:none!important;
+}
+.case-blackboard{
+  left:50%!important;
+  top:50%!important;
+  width:160vw!important;
+  height:140vh!important;
+  min-width:1450px!important;
+  min-height:900px!important;
+  transform:translate3d(calc(-50% + var(--cam-x,0vw)),calc(-50% + var(--cam-y,0vh)),0) scale(var(--cam-s,.94))!important;
+  transform-origin:center center!important;
+}
+.case-chalk-title{
+  left:9%!important;
+  top:29%!important;
+}
+.case-chalk-title strong{
+  font-size:clamp(48px,6vw,96px)!important;
+}
+.case-board-meta{top:4%!important}
+.case-software-wall{top:8%!important}
+.case-hotspot-1{left:7%!important;top:38%!important}
+.case-hotspot-2{left:52%!important;top:37%!important}
+.case-hotspot-3{left:8%!important;top:51%!important}
+.case-hotspot-4{left:52%!important;top:50%!important}
+.case-hotspot-5{left:8%!important;top:64%!important}
+.case-hotspot-6{left:52%!important;top:63%!important}
+.case-hotspot-7{left:18%!important;top:77%!important}
+.case-hotspot-8{left:58%!important;top:76%!important}
+.case-final-zone{
+  left:25%!important;
+  right:7%!important;
+  bottom:-2%!important;
+  height:21%!important;
+}
+.case-board-scribble{bottom:4%!important}
+.case-board-stamp{bottom:5%!important}
+.case-cinema-vignette{
+  background:radial-gradient(circle at 50% 48%,transparent 55%,rgba(0,0,0,.5) 100%)!important;
+}
+@media(max-width:900px){
+  .case-blackboard{width:210vw!important;height:150vh!important;min-width:1300px!important;min-height:900px!important}
+}
+@media(max-width:650px){
+  .case-blackboard{width:270vw!important;height:165vh!important;min-width:1250px!important;min-height:900px!important}
+}
