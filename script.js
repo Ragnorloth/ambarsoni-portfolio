@@ -328,7 +328,7 @@ function setupInteractions(){
   setupScrollMotion();
   setupEnvelopeScroll();
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.08});
-  document.querySelectorAll('.film,.asset,.about h2,.contact h2,.envelope-copy,.special-section .section-head,.special-section .special-foot').forEach(e=>{e.classList.add('reveal');io.observe(e)});
+  document.querySelectorAll('.film,.asset,.about h2,.contact h2,.envelope-copy,.special-section .section-head,.special-section .special-foot,.case-scene,.case-close,.case-hero').forEach(e=>{e.classList.add('reveal');io.observe(e)});
 }
 
 function setupManagedMedia(){
