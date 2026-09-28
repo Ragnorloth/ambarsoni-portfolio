@@ -292,21 +292,21 @@ function setupCaseCinema(){
   const label=section.querySelector('[data-case-camera-label]'),pct=section.querySelector('[data-case-camera-progress]');
   const hotspots=[...board.querySelectorAll('.case-hotspot')];
   const poses=[
-    {x:0,y:0,s:.96,label:'01 / CASE STUDY'},
-    {x:-3,y:1,s:1.01,label:'02 / SCRIPT + BRIEF'},
-    {x:4,y:-1,s:1.05,label:'03 / IDEATION + REFERENCES'},
-    {x:-4,y:-2,s:1.09,label:'04 / VISUAL DEVELOPMENT'},
-    {x:4,y:-3,s:1.13,label:'05 / 3D + ANIMATION'},
-    {x:-4,y:-4,s:1.17,label:'06 / AFTER EFFECTS'},
-    {x:4,y:-5,s:1.20,label:'07 / EDIT + SOUND'},
-    {x:-3,y:-6,s:1.23,label:'08 / CAPTIONS + DELIVERY'},
-    {x:0,y:-7,s:1.27,label:'09 / CASE FILE CLOSED'}
+    {x:0,y:0,s:.94,label:'01 / CASE STUDY'},
+    {x:5,y:-1,s:1.02,label:'02 / SCRIPT + BRIEF'},
+    {x:-6,y:-4,s:1.06,label:'03 / IDEATION + REFERENCES'},
+    {x:5,y:-7,s:1.09,label:'04 / VISUAL DEVELOPMENT'},
+    {x:-6,y:-10,s:1.12,label:'05 / 3D + ANIMATION'},
+    {x:5,y:-13,s:1.15,label:'06 / AFTER EFFECTS'},
+    {x:-6,y:-16,s:1.18,label:'07 / EDIT + SOUND'},
+    {x:4,y:-19,s:1.21,label:'08 / CAPTIONS + DELIVERY'},
+    {x:0,y:-22,s:1.25,label:'09 / CASE FILE CLOSED'}
   ];
   const clamp=(n,a=0,b=1)=>Math.max(a,Math.min(b,n));
   const ease=n=>n*n*(3-2*n);
   const update=()=>{
     const rect=section.getBoundingClientRect(),range=Math.max(section.offsetHeight-innerHeight,1);
-    const p=clamp(-rect.top/range),write=clamp(p/.12);
+    const p=clamp(-rect.top/range),write=clamp(p/.16);
     section.style.setProperty('--case-progress',p.toFixed(3));
     section.style.setProperty('--case-write',write.toFixed(3));
     const scaled=ease(p)*(poses.length-1),a=Math.floor(scaled),b=Math.min(a+1,poses.length-1),t=scaled-a,A=poses[a],B=poses[b];
@@ -314,12 +314,12 @@ function setupCaseCinema(){
     camera.style.setProperty('--cam-y',(A.y+(B.y-A.y)*t)+'vh');
     camera.style.setProperty('--cam-s',(A.s+(B.s-A.s)*t).toFixed(3));
     hotspots.forEach((el,i)=>{
-      const threshold=.055+i*.105;
+      const threshold=.08+i*.105;
       el.classList.toggle('case-revealed',p>threshold);
-      el.style.setProperty('--case-local',clamp((p-threshold)/.12).toFixed(3));
+      el.style.setProperty('--case-local',clamp((p-threshold)/.13).toFixed(3));
     });
     const final=board.querySelector('.case-final-zone');
-    if(final) final.classList.toggle('case-revealed',p>.80);
+    if(final) final.classList.toggle('case-revealed',p>.82);
     if(label)label.textContent=t<.5?A.label:B.label;
     if(pct)pct.textContent=String(Math.round(p*100)).padStart(2,'0')+'%';
   };
