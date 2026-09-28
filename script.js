@@ -286,45 +286,65 @@ function loadContent(){
 }
 
 function setupCaseCinema(){
-  const section=document.querySelector('.case-cinema'),board=document.querySelector('[data-case-board]'),camera=document.querySelector('[data-case-camera]');
-  if(!section||!board||!camera||section.dataset.caseReady==='true')return;
+  const section=document.querySelector('.case-cinema');
+  const board=document.querySelector('[data-case-board]');
+  if(!section||!board||section.dataset.caseReady==='true') return;
   section.dataset.caseReady='true';
-  const label=section.querySelector('[data-case-camera-label]'),pct=section.querySelector('[data-case-camera-progress]');
+
+  const label=section.querySelector('[data-case-camera-label]');
+  const pct=section.querySelector('[data-case-camera-progress]');
   const hotspots=[...board.querySelectorAll('.case-hotspot')];
-  const poses=[
-    {x:0,y:0,s:.94,label:'01 / CASE STUDY'},
-    {x:5,y:-1,s:1.02,label:'02 / SCRIPT + BRIEF'},
-    {x:-6,y:-4,s:1.06,label:'03 / IDEATION + REFERENCES'},
-    {x:5,y:-7,s:1.09,label:'04 / VISUAL DEVELOPMENT'},
-    {x:-6,y:-10,s:1.12,label:'05 / 3D + ANIMATION'},
-    {x:5,y:-13,s:1.15,label:'06 / AFTER EFFECTS'},
-    {x:-6,y:-16,s:1.18,label:'07 / EDIT + SOUND'},
-    {x:4,y:-19,s:1.21,label:'08 / CAPTIONS + DELIVERY'},
-    {x:0,y:-22,s:1.25,label:'09 / CASE FILE CLOSED'}
-  ];
+  const final=board.querySelector('.case-final-zone');
+
+  // Deliberately use a fixed centered board. Scroll controls the reveal sequence,
+  // not a large camera translation, so the board can never fly off-screen.
   const clamp=(n,a=0,b=1)=>Math.max(a,Math.min(b,n));
   const ease=n=>n*n*(3-2*n);
+
   const update=()=>{
-    const rect=section.getBoundingClientRect(),range=Math.max(section.offsetHeight-innerHeight,1);
-    const p=clamp(-rect.top/range),write=clamp(p/.16);
+    const rect=section.getBoundingClientRect();
+    const range=Math.max(section.offsetHeight-window.innerHeight,1);
+    const p=clamp(-rect.top/range);
+
     section.style.setProperty('--case-progress',p.toFixed(3));
-    section.style.setProperty('--case-write',write.toFixed(3));
-    const scaled=ease(p)*(poses.length-1),a=Math.floor(scaled),b=Math.min(a+1,poses.length-1),t=scaled-a,A=poses[a],B=poses[b];
-    camera.style.setProperty('--cam-x',(A.x+(B.x-A.x)*t)+'vw');
-    camera.style.setProperty('--cam-y',(A.y+(B.y-A.y)*t)+'vh');
-    camera.style.setProperty('--cam-s',(A.s+(B.s-A.s)*t).toFixed(3));
+    section.style.setProperty('--case-write',clamp(p/.12).toFixed(3));
+    board.style.setProperty('--board-scale',(0.96 + ease(p)*0.04).toFixed(3));
+
     hotspots.forEach((el,i)=>{
-      const threshold=.08+i*.105;
-      el.classList.toggle('case-revealed',p>threshold);
-      el.style.setProperty('--case-local',clamp((p-threshold)/.13).toFixed(3));
+      const startAt=0.10+i*0.085;
+      const local=clamp((p-startAt)/0.075);
+      el.classList.toggle('case-revealed',p>=startAt);
+      el.classList.toggle('case-current',local>0 && local<1);
+      el.style.setProperty('--case-local',local.toFixed(3));
     });
-    const final=board.querySelector('.case-final-zone');
-    if(final) final.classList.toggle('case-revealed',p>.82);
-    if(label)label.textContent=t<.5?A.label:B.label;
-    if(pct)pct.textContent=String(Math.round(p*100)).padStart(2,'0')+'%';
+
+    const finalStart=.84;
+    const finalLocal=clamp((p-finalStart)/.10);
+    if(final){
+      final.classList.toggle('case-revealed',p>=finalStart);
+      final.style.setProperty('--case-local',finalLocal.toFixed(3));
+    }
+
+    const activeIndex=Math.min(
+      hotspots.length-1,
+      Math.max(0,Math.floor((p-.10)/.085))
+    );
+    if(p<.10){
+      if(label) label.textContent='01 / CASE STUDY';
+    }else if(p>=finalStart){
+      if(label) label.textContent='09 / CASE FILE CLOSED';
+    }else if(label){
+      label.textContent=(String(activeIndex+2).padStart(2,'0'))+' / '+(hotspots[activeIndex]?.dataset.caseStep==='1'?'SCRIPT + BRIEF':
+        hotspots[activeIndex]?.querySelector('.case-note-top span')?.textContent?.split(' / ')[1] || 'WORKFLOW');
+    }
+    if(pct) pct.textContent=String(Math.round(p*100)).padStart(2,'0')+'%';
   };
+
   let raf=0;
-  const onScroll=()=>{if(raf)return;raf=requestAnimationFrame(()=>{update();raf=0;})};
+  const onScroll=()=>{
+    if(raf) return;
+    raf=requestAnimationFrame(()=>{update();raf=0;});
+  };
   addEventListener('scroll',onScroll,{passive:true});
   addEventListener('resize',update,{passive:true});
   update();
