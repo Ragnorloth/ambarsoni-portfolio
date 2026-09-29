@@ -276,7 +276,7 @@
           "featured": false,
           "title": "Strandsoul | Serum",
           "media_type": "embed",
-          "video_url": "https://www-ccv.adobe.io/v1/player/ccv/GgTFT3rjtU-/embed?api_key=behance1"
+          "video_url": "https://www-ccv.adobe.io/v1/player/ccv/7-NYLHWIAbT/embed?api_key=behance1&bgcolor=%23191919&utm_source=chatgpt.com"
         }
       ],
       "heading": "And Much More....",
@@ -904,18 +904,19 @@
     {
       "items": [
         {
+          "visual": "script",
           "visible": true,
-          "phase": "01 / SCRIPTING",
+          "note": "The edit starts before Premiere Pro.",
+          "media_type": "embed",
+          "script_hook": "What is the one thing the viewer should remember?",
           "title": "Start with the story.",
-          "description": "Turn a loose idea into a clear hook, narrative, shot direction and message before the timeline gets involved.",
+          "phase": "01 / SCRIPTING",
           "tools": [
             "Script",
             "Hook",
             "Story beats"
           ],
-          "note": "The edit starts before Premiere Pro.",
-          "visual": "script",
-          "script_hook": "What is the one thing the viewer should remember?"
+          "description": "Turn a loose idea into a clear hook, narrative, shot direction and message before the timeline gets involved."
         },
         {
           "visible": true,
@@ -928,7 +929,8 @@
             "AI"
           ],
           "note": "Reference first. Execution second.",
-          "visual": "references"
+          "visual": "references",
+          "media_type": "embed"
         },
         {
           "visible": true,
@@ -941,7 +943,8 @@
             "Art direction"
           ],
           "note": "Every frame needs a reason to exist.",
-          "visual": "paper"
+          "visual": "paper",
+          "media_type": "embed"
         },
         {
           "visible": true,
@@ -955,7 +958,8 @@
             "Animation"
           ],
           "note": "Make the world believable, then make it move.",
-          "visual": "blender"
+          "visual": "blender",
+          "media_type": "embed"
         },
         {
           "visible": true,
@@ -968,7 +972,8 @@
             "VFX"
           ],
           "note": "Polish the idea without hiding it.",
-          "visual": "ae"
+          "visual": "ae",
+          "media_type": "embed"
         },
         {
           "visible": true,
@@ -982,7 +987,8 @@
             "Color"
           ],
           "note": "Timing is storytelling.",
-          "visual": "edit"
+          "visual": "edit",
+          "media_type": "embed"
         },
         {
           "visible": true,
@@ -995,7 +1001,8 @@
             "QC"
           ],
           "note": "Accessibility should still feel designed.",
-          "visual": "captions"
+          "visual": "captions",
+          "media_type": "embed"
         },
         {
           "visible": true,
@@ -1008,10 +1015,13 @@
             "Delivery"
           ],
           "note": "Then it is ready for the world.",
-          "visual": "paper"
+          "visual": "paper",
+          "media_type": "embed"
         }
       ],
       "heading": "From idea to final frame.",
+      "case_closing_image": "assets/profile-ambar.webp",
+      "case_closing_text": "For creativity, collaborations or just a conversation — let’s connect.",
       "theme": "dark",
       "eyebrow": "03 / CASE STUDY",
       "show_in_nav": true,
@@ -1020,9 +1030,7 @@
       "nav_label": "Case Study",
       "presentation": "case-study",
       "description": "A behind-the-scenes trail through scripting, ideation, visual development, 3D, motion, editing, captions and delivery.",
-      "case_closing_title": "Looking forward to connect.",
-      "case_closing_text": "For creativity, collaborations or just a conversation — let’s connect.",
-      "case_closing_image": "assets/profile-ambar.webp"
+      "case_closing_title": "Looking forward to connect."
     },
     {
       "items": [
