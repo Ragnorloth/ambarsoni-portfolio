@@ -276,7 +276,8 @@
           "featured": false,
           "title": "Strandsoul | Serum",
           "media_type": "embed",
-          "video_url": "https://www-ccv.adobe.io/v1/player/ccv/7-NYLHWIAbT/embed?api_key=behance1&bgcolor=%23191919&utm_source=chatgpt.com"
+          "video_url": "https://www-ccv.adobe.io/v1/player/ccv/7-NYLHWIAbT/embed?api_key=behance1&bgcolor=%23191919&utm_source=chatgpt.com",
+          "image": "/assets/uploads/screenshot-2026-09-29-124435.png"
         }
       ],
       "heading": "And Much More....",
